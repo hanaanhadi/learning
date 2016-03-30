@@ -7,22 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Learning</title>
-    <!-- Compressed Vendor BUNDLE
-    Includes vendor (3rd party) styling such as the customized Bootstrap and other 3rd party libraries used for the current theme/module -->
+   
     <link href="css/vendor.min.css" rel="stylesheet">
-    <!-- Compressed Theme BUNDLE
-Note: The bundle includes all the custom styling required for the current theme, however
-it was tweaked for the current theme/module and does NOT include ALL of the standalone modules;
-The bundle was generated using modern frontend development tools that are provided with the package
-To learn more about the development process, please refer to the documentation. -->
-    <!-- <link href="css/theme.bundle.min.css" rel="stylesheet"> -->
-    <!-- Compressed Theme CORE
-This variant is to be used when loading the separate styling modules -->
+
     <link href="css/theme-core.min.css" rel="stylesheet">
-    <!-- Standalone Modules
-    As a convenience, we provide the entire UI framework broke down in separate modules
-    Some of the standalone modules may have not been used with the current theme/module
-    but ALL modules are 100% compatible -->
+
     <link href="css/module-essentials.min.css" rel="stylesheet" />
     <link href="css/module-material.min.css" rel="stylesheet" />
     <link href="css/module-layout.min.css" rel="stylesheet" />
@@ -37,17 +26,10 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
-    <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+ 
 </head>
 <body>
     <!-- Wrapper required for sidebar transitions -->
-    <<!-- Wrapper required for sidebar transitions -->
     <div class="st-container">
         <!-- Fixed navbar -->
         <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
@@ -58,7 +40,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
                    
                 <!-- main-nav Starts  -->
-                     <?php require_once('php/header/main-nav.php'); ?>
+                     <?php require_once('include/main-nav.php'); ?>
                <!-- main-nav  Ends  -->
 
             </div>
@@ -68,16 +50,30 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         </div>
                  <!-- Sidebar Menu  Starts  -->
                      
-                     <?php require_once('php/left-sidebar/left-sidebar.php'); ?>
+                     <?php require_once('include/left-sidebar.php'); ?>
                     
                     <!-- Sidebar Menu  Ends  -->
+        <!-- St-pusher Start -->
+                
+        <div class="st-pusher" id="content">
+                <!-- St-Content Start -->
+                
+                     <?php require_once('include/st-content.php'); ?>
+                <!-- St-content End -->
+    
+           
         </div>
-        <!-- /st-pusher -->
-        <!-- Footer -->
-        <footer class="footer">
-            <strong>Learning</strong> v1.0.0 &copy; Copyright 2015
-        </footer>
-        <!-- // Footer -->
+        <!-- /St-pusher End -->
+
+
+                <!-- Footer Start -->
+        
+                    <?php require_once('include/footer.php'); ?>
+          
+              <!-- // Footer End-->
+
+
+
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
@@ -114,20 +110,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <script src="js/vendor-charts-flot.min.js"></script>
     <script src="js/vendor-nestable.min.js"></script>
     <!-- <script src="js/vendor-angular.min.js"></script> -->
-    <!-- Compressed Vendor Scripts Bundle
-    Includes all of the 3rd party JavaScript libraries above.
-    The bundle was generated using modern frontend development tools that are provided with the package
-    To learn more about the development process, please refer to the documentation.
-    Do not use it simultaneously with the separate bundles above. -->
-    <!-- <script src="js/vendor-bundle-all.min.js"></script> -->
-    <!-- Compressed App Scripts Bundle
-    Includes Custom Application JavaScript used for the current theme/module;
-    Do not use it simultaneously with the standalone modules below. -->
-    <!-- <script src="js/module-bundle-main.min.js"></script> -->
-    <!-- Standalone Modules
-    As a convenience, we provide the entire UI framework broke down in separate modules
-    Some of the standalone modules may have not been used with the current theme/module
-    but ALL the modules are 100% compatible -->
+    
     <script src="js/module-essentials.min.js"></script>
     <script src="js/module-material.min.js"></script>
     <script src="js/module-layout.min.js"></script>
@@ -138,10 +121,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <script src="js/module-maps-google.min.js"></script>
     <script src="js/module-charts-flot.min.js"></script>
     <!-- [html] Core Theme Script:
-        Includes the custom JavaScript for this theme/module;
-        The file has to be loaded in addition to the UI modules above;
-        module-bundle-main.js already includes theme-core.js so this should be loaded
-        ONLY when using the standalone modules; -->
+        
     <script src="js/theme-core.min.js"></script>
 </body>
 </html>
