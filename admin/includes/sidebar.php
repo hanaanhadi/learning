@@ -13,34 +13,24 @@
                     
                     <li class="hasSubmenu">
                         <a href="#cat-menu"><i class="fa fa-file-text-o"></i><span>Main Category</span></a>
-                        <ul id="cat-menu">
-                            <li><a href="insert-mcategory.php"><span>Insert Category</span></a></li>
-                            <li><a href="#"><span>View Categories</span></a></li>
-                            </ul>
+                        
                     </li>
                     <li class="hasSubmenu">
                         <a href="#subcat-menu"><i class="fa fa-mortar-board"></i><span>Sub Category</span></a>
-                        <ul id="subcat-menu">
-                            <li><a href="#"><span>Insert  Categories </span></a></li>
-                            <li><a href="#"><span>View Categories</span></a></li>
-                            
-                        </ul>
-                    </li>
+                     </li>
                     
                     <li class="hasSubmenu">
                         <a href="#subject-menu"><i class="fa fa-bars"></i><span>Subjects</span></a>
-                        <ul id="subject-menu">
-                            <li><a href="#"><span>Insert Subjects</span></a></li>
-                            <li><a href="#"><span>View Subjects</span></a></li>
-                        </ul>
+                       
                     </li>
                      
+                    <li class="hasSubmenu">
+                        <a href="#subject-menu"><i class="fa fa-bars"></i><span>Questions</span></a>
+                    </li>
+                    
                      <li class="hasSubmenu">
                         <a href="#option-menu"><i class="fa fa-pencil-square-o"></i><span>Options</span></a>
-                        <ul id="option-menu">
-                            <li><a href="#"><span>Insert Options</span></a></li>
-                            <li><a href="#"><span>View Options</span></a></li>
-                        </ul>
+                        
                     </li>
                     <li class="hasSubmenu">
                         <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
