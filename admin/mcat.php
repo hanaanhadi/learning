@@ -1,4 +1,14 @@
 <?php $page = "mcat"; ?>
+<?php 
+if (isset($_GET['submit']))
+{
+    $mcat=$_GET['mcat'];
+}
+
+
+
+
+?>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>
@@ -81,9 +91,29 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            
-             <?php require_once('stcontent.php');?>  
-            
+            <?php require_once('db/conn.php');?>
+            <label><h2 class="btn btn-primary"> Insert Main Category : </h2><br> </label> 
+             <div class="panel panel-default">
+                        <div class="panel-body">
+                            <br><form method="get" action="#">
+                                
+                                <div class="form-group form-control-material static required">
+                                    <input type="text" class="form-control" id="mcat" placeholder="Enter Main Category" name="mcat">
+                                    <label for="mcat">Main Category</label>
+                                </div>
+
+                                    
+                                        <div class="form-control-material">
+                                            <textarea id="textarea" class="form-control" rows="5"></textarea>
+                                            <label for="textarea">Textarea</label>
+                                        </div>
+                                    </div>
+    
+                               
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            </form>
+                        </div>
+                    </div>
             <!-- /st-content -->
         </div>
         <!-- /st-pusher -->
