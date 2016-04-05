@@ -1,7 +1,7 @@
 <section class="gray-bg tabs-section">
         	<div class="container">
             	<!--SECTION HEADER START-->
-            	<div class="sec-header" id="topicsection">
+            	<div class="sec-header" id="topics">
                 	<h2>Courses Topic</h2>
                     <p>Discover courses by topic</p>
                     <span></span>

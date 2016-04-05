@@ -20,8 +20,8 @@
 <!-- PARALLAX BACKGROUNDS -->
 <link href="css/parallax.css" rel="stylesheet" type="text/css" />
 
-<script src="js/jquery-1.9.1.min.js"></script>
-    <script src='js/jquery.scrollto.js'></script>
+<script src="scroll/js/jquery-1.9.1.min.js"></script>
+    <script src='scroll/js/jquery.scrollto.js'></script>
 
 </head>
 <body>

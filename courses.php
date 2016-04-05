@@ -1,7 +1,7 @@
 <section class="gray-bg">
         	<div class="container">
             	<!--SECTION HEADER START-->
-            	<div class="sec-header" id="coursesection">
+            	<div class="sec-header" id="courses">
                 	<h2>Latest Courses</h2>
                     <p>Check Our Featured Courses</p>
                     <span></span>

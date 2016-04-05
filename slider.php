@@ -1,4 +1,4 @@
-<div class="banner" id="homesection">
+<div class="banner" id="home">
         <ul class="bxslider">
           <li><img src="images/banner1.jpg" alt=""> </li>
           <li><img src="images/banner2.jpg" alt=""></li>

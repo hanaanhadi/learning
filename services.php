@@ -1,4 +1,4 @@
-       <section id="servicesection">
+       <section id="services">
         	<div class="container" >
             	<!--SECTION HEADER START-->
             	<div class="sec-header" >

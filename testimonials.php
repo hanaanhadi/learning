@@ -1,6 +1,6 @@
 <section class="testimonials">
         	<div class="container testimonial-contant">
-            	<div class="sec-header" id="testimonialsection">
+            	<div class="sec-header" id="testimonials">
                     <h2>Read Our Testimonials</h2>
                     <p>What Students say</p>
                     <span></span>

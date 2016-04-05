@@ -39,15 +39,17 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						  </button>
-						  <div class="nav-collapse collapse" id="navbar">
-							<ul>
-								<li><a href="#homesection">Home</a></li>
-								<li><a href="#servicesection">Services</a></li>
-								<li><a href="#coursesection">Courses</a></li>
-								<li><a href="#topicsection">Course topics</a></li>
-								<li><a href="#testimonialsection">Testimonials </a></li>
-								<li><a href="#newssection">News</a></li>
-								<li><a href="#followussection">Follow Us</a></li>
+						  <div class="nav-collapse collapse">
+							
+                            <div id="nav-anchor"></div>
+                            <ul>
+								<li><a href="#home">Home</a></li>
+								<li><a href="#services">Services</a></li>
+								<li><a href="#courses">Courses</a></li>
+								<li><a href="#topics">Course topics</a></li>
+								<li><a href="#testimonials">Testimonials </a></li>
+								<li><a href="#news">News</a></li>
+								<li><a href="#follow">Follow Us</a></li>
 							</ul>
 						  </div>
 						</div>
@@ -56,4 +58,6 @@
 				</div>
             </div>
         </div>
+
+
         
