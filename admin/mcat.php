@@ -1,4 +1,4 @@
-<?php $page = "instdashboard"; ?>
+<?php $page = "mcat"; ?>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>

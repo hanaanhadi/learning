@@ -9,26 +9,26 @@
                     </div>
                 </div>
                 <ul class="sidebar-menu">
-                    <li class="active"><a href="app-student-dashboard.html"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+                    <li><a href="inst-dashboard.php"  <?php if($page == "instdashboard"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?>><i class="fa fa-home"></i><span>Dashboard</span></a></li>
                     
-                    <li class="hasSubmenu">
-                        <a href="#cat-menu"><i class="fa fa-file-text-o"></i><span>Main Category</span></a>
+                    <li class="hasSubmenuu">
+                        <a href="mcat.php"  <?php if($page == "mcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?>><i class="fa fa-file-text-o"></i><span>Main Category</span></a>
                         
                     </li>
-                    <li class="hasSubmenu">
+                    <li class="hasSubmenuu">
                         <a href="#subcat-menu"><i class="fa fa-mortar-board"></i><span>Sub Category</span></a>
                      </li>
                     
-                    <li class="hasSubmenu">
+                    <li class="hasSubmenuu">
                         <a href="#subject-menu"><i class="fa fa-bars"></i><span>Subjects</span></a>
                        
                     </li>
                      
-                    <li class="hasSubmenu">
+                    <li class="hasSubmenuu">
                         <a href="#subject-menu"><i class="fa fa-bars"></i><span>Questions</span></a>
                     </li>
                     
-                     <li class="hasSubmenu">
+                     <li class="hasSubmenuu">
                         <a href="#option-menu"><i class="fa fa-pencil-square-o"></i><span>Options</span></a>
                         
                     </li>
