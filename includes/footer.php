@@ -1,53 +1,87 @@
-<section class="footer-section">
+<footer>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <h4 class="text-headline text-light">Corporate</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#">About the company</a></li>
-                        <li><a href="#">Company offices</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="#">Terms of use</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Contact us</a></li>
+        	<div class="row">
+            <!--OUR ARTICLE WIDGET START-->
+               
+        <div class="tweets">
+            <div class="container">
+            	<div class="tweet-contant">
+                	<i class="fa fa-twitter"></i>
+                    <h4>Weekly Updates</h4>
+                    <ul class="bxslider">
+                        <li>
+                            <p>Are you a morning person or is the night time the right time? Interesting perspectives on the forum - <a href="#">http://t.co/tdEHlbZf</a></p>
+                        </li>
+                        <li>
+                            <p>Dolor donec sagittis sapien. Ante aptent feugiat adipisicing. Duis int. - <a href="#">http://t.co/tdEHlbZf</a></p>
+                        </li>
+                        <li>
+                            <p>Duis interdum olor donec sagittis sapien. Ante aptent feugiat adipisicing - <a href="#">http://t.co/tdEHlbZf</a></p>
+                        </li>
+                        
                     </ul>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <h4 class="text-headline text-light">Explore</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="">Courses</a></li>
-                        <li><a href="">Tutors</a></li>
-                        <li><a href="">Pricing</a></li>
-                        <li><a href="">Become Tutor</a></li>
-                        <li><a href="">Sign Up</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <h4 class="text-headline text-light">Newsletter</h4>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter email here...">
-                            <span class="input-group-btn">
-								<button class="btn btn-grey-800" type="button">Subscribe</button>
-							  </span>
-                        </div>
-                    </div>
-                    <br/>
-                    <p>
-                        <a href="#" class="btn btn-indigo-500 btn-circle"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="btn btn-pink-500 btn-circle"><i class="fa fa-dribbble"></i></a>
-                        <a href="#" class="btn btn-blue-500 btn-circle"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="btn btn-danger btn-circle"><i class="fa fa-google-plus"></i></a>
-                    </p>
-                    <p class="text-subhead">
-                        &copy; 2016 E Testing .
-                    </p>
                 </div>
             </div>
         </div>
+        <div class="bottom-footer">
+            <div class="container">
+                <div class="row">
+                <!--OUR ARTICLE WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-categories">
+                            <h2>Course Categories</h2>
+                            <ul>
+                                <li><a href="#">Site Style Changer</a></li>
+                                <li><a href="#">Bredcrums</a></li>
+                                <li><a href="#">Bottom Sidebar</a></li>
+                                <li><a href="#">Right Sidebar</a></li>
+                                <li><a href="#">Left Sidebar</a></li>
+                                <li><a href="#">Sitemap Page Setting</a></li>
+                                <li><a href="#">Site Style Changer</a></li>
+                                <li><a href="#">Bredcrums</a></li>
+                                <li><a href="#">Bottom Sidebar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--OUR ARTICLE WIDGET END-->
+                    <!--TOP RATED WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-facebook">
+                            <h2>Fcebook</h2>
+                            <div class="pull-left">
+                            	<img src="images/facebook-widget.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!--TOP RATED WIDGET END-->
+                    <!--RECENT REVIES WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-newsletter">
+                            <h2>Newsletters</h2>
+                            <div class="newsletter-contant">
+                            	<p>Subscribe to be the first to know about best deals and exclusive offers!</p>
+                                <p><input type="text" class="input-block-level"></p>
+                                <p><button>Subscribe</button></p>
+                            </div>                            
+                        </div>
+                    </div>
+                    <!--RECENT REVIES WIDGET END-->
+                    <!--RECENT POSTS WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-map">
+                            <h2>Where we are?</h2>
+                            <div class="location-map">
+                            	<div id="map-canvas"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--RECENT POSTS WIDGET END-->                
+                </div>
+            </div>
         </div>
-    </section>
-    <!-- Footer -->
-    <footer class="footer">
-        <strong>E Testing</strong> v1.0.0 &copy; Copyright 2016
+        <div class="copyright">
+        	<div class="container">
+        		<p">© Copyrights 2014-15. All Rights Reserved <a href="#">Online Learning</a></p>
+            </div>
+        </div>
     </footer>
