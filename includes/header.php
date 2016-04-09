@@ -1,4 +1,4 @@
-<div class="navigation-bar">
+<div class="navigation-bar .navbar navbar-reverse">
         	<div class="container">
             	<div class="logo">
                 	<a href="index.html"><img src="images/logo.png" alt=""></a>

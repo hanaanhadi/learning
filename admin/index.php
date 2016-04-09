@@ -49,6 +49,7 @@
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
     <script src="js/vendor-countdown.min.js"></script>
+    
     <script src="js/vendor-tables.min.js"></script>
     <script src="js/vendor-forms.min.js"></script>
     <script src="js/vendor-carousel-slick.min.js"></script>

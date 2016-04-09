@@ -21,8 +21,7 @@
 <link href="css/parallax.css" rel="stylesheet" type="text/css" />
 
 <script src="js/jquery-1.9.1.min.js"></script>
-    <script src='js/jquery.scrollto.js'></script>
-
+    
 </head>
 <body>
 <!--WRAPPER START-->
@@ -31,7 +30,7 @@
     <!--HEADER START-->
     <header>
 	
-		<script src="js/scroll.js"></script>
+		
         <!--NAVIGATION START-->
 		<?php require_once('includes/header.php');?>
 		<!--NAVIGATION END-->
@@ -111,8 +110,32 @@
 <!--WRAPPER END-->
 <!-- Jquery Lib -->
 <script src="js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/scroll.js"></script>
+<script type="text/javascript">
+    
 
+    $(document).ready(function(){
+      $('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+        && location.hostname == this.hostname) {
+          var $target = $(this.hash);
+          $target = $target.length && $target
+          || $('[name=' + this.hash.slice(1) +']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body')
+            .animate({scrollTop: targetOffset}, 1500);
+           return false;
+          }
+        }
+      });
+    });
+
+
+
+
+
+
+</script>
 <!-- Bootstrap -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.bxslider.min.js"></script>
