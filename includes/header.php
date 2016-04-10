@@ -1,4 +1,4 @@
-<div class="navigation-bar .navbar navbar-reverse">
+<div class="navigation-bar">
         	<div class="container">
             	<div class="logo">
                 	<a href="index.html"><img src="images/logo.png" alt=""></a>
@@ -47,9 +47,10 @@
 								<li><a href="#services">Services</a></li>
 								<li><a href="#courses">Courses</a></li>
 								<li><a href="#topics">Course topics</a></li>
-								<li><a href="#testimonials">Testimonials </a></li>
+                                <li><a href="#blog">Blogs</a></li>
 								<li><a href="#news">News</a></li>
-								<li><a href="#follow">Follow Us</a></li>
+								<li><a href="#testimonials">Testimonials </a></li>
+                                <li><a href="#followus">Follow Us</a></li>
 							</ul>
 						  </div>
 						</div>

@@ -1,5 +1,5 @@
 <section class="gray-bg">
-        	<div class="container">
+        	<div class="container" id="news">
             	<div class="row">
                 	<div class="span4">
                     	<div class="box" id="newssection">

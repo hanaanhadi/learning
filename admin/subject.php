@@ -1,19 +1,5 @@
-<?php $page = "mcat"; ?>
-<?php require_once('db/conn.php') ?>
-<?php 
-if (isset($_POST['submit'])) 
-{
-    $mcname = $_POST['mname'];
-    $mcdesc = $_POST['mdesc'];
-    $qry=("INSERT INTO `main_category` VALUES('','$mcname','$mcdesc')") or die(mysql_error());
-    mysqli_query($conn,$qry);
+<?php $page = "subject"; ?>
 
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?mid=inserted");
-}
-
-
-
-?>
 
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
@@ -100,19 +86,19 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <?php require_once('db/conn.php');?> 
              <div class="panel panel-default">
                         <div class="panel-body">
-                            <form method="post" action="">
+                            <form method="get" action="#">
                                 
                                                            
                               <div class="form-group">
                                 <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mname" id="cname" placeholder="Enter Category Name " required=>
+                                <input type="text" class="form-control" name="mname" id="cname" placeholder="Enter Category Name ">
                               </div>
                               <div class="form-group">
                                 <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
+                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description "></textarea>
                               </div>
                               
-                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block"><i class="fa fa-plus"></i></input>
+                              <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </form>
     
                             

@@ -75,7 +75,7 @@
    
         <!--PAPULAR POSTS SECTION START-->
         
-		<?php require_once('popoularpost.php');?>
+		<?php require_once('blog.php');?>
         
 		<!--PAPULAR POSTS SECTION END-->
         

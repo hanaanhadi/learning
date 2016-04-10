@@ -1,8 +1,9 @@
-<section class="follow-us" id="followussection">
+
+<section class="follow-us">
         	<div class="container">
             	<div class="row">
                 	<div class="span4">
-                    	<div class="follow" >
+                    	<div class="follow" id="followus" >
                         	<a href="#">
                                 <i class="fa fa-facebook"></i>
                                 <div class="text">
@@ -37,3 +38,4 @@
                 </div>
             </div>
         </section>
+        </div>

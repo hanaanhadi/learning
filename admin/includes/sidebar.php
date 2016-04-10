@@ -16,11 +16,11 @@
                         
                     </li>
                     <li class="hasSubmenuu">
-                        <a href="#subcat-menu"><i class="fa fa-mortar-board"></i><span>Sub Category</span></a>
+                        <a href="subcat.php" <?php if($page == "subcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?>><i class="fa fa-mortar-board"></i><span>Sub Category</span></a>
                      </li>
                     
                     <li class="hasSubmenuu">
-                        <a href="#subject-menu"><i class="fa fa-bars"></i><span>Subjects</span></a>
+                        <a href="subject.php" <?php if($page == "subject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?>><i class="fa fa-bars"></i><span>Subjects</span></a>
                        
                     </li>
                      

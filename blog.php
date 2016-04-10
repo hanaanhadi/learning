@@ -2,7 +2,7 @@
         	<div id="bg4" data-0="background-position:0px 0px;" data-end="background-position:0px -1000px;"></div>
             <div class="container post-contant">
             	<!--SECTION HEADER START-->
-                <div class="sec-header">
+                <div class="sec-header" id="blog">
                     <h2>Popular Posts</h2>
                     <p>Latest From Blog</p>
                     <span></span>

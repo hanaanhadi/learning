@@ -7,10 +7,10 @@
         <div class="container">
             <div class="navbar-header">
                 
-                <?php require_once("includes/logodata.php"); ?>
+                <?php// require_once("includes/logodata.php"); ?>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <?php require_once("includes/menu.php"); ?>
+            <?php //require_once("includes/menu.php"); ?>
             <!-- /.navbar-collapse -->
         </div>
     </div>

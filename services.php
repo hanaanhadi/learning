@@ -1,15 +1,15 @@
-       <section id="services">
-        	<div class="container" >
+       <section>
+        	<div class="container" id="services" >
             	<!--SECTION HEADER START-->
             	<div class="sec-header" >
-                	<h2>Our Services</h2>
+                	<h2 >Our Services</h2>
                     <p>Take a look at what we have are doing</p>
 					<span></span>
 					<span></span>
 					<span></span>
                 </div>
                 <!--SECTION HEADER END-->
-                <div class="row">
+                <div class="row" >
                 	<!--SERVICE ITEM START-->
                 	<div class="span4">
                     	<div class="services">
