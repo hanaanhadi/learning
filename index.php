@@ -96,8 +96,7 @@
 	   <?php require_once('followus.php');?>
 
 	   <!--FOLLOW US SECTION END-->
-	 
-	 
+
 
 	   
     </div>

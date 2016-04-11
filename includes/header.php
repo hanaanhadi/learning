@@ -14,19 +14,7 @@
                         
                         
                         <li>
-						<div class="dropdown">
-                                <a class="dropdown-toggle" id="account" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                                My Account
-                                <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="account">
-                                    <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Account Setting</a></li>
-                                    <li><a href="#">Privacy Setting</a></li>
-                                </ul>
-                            </div>
-						
-					
+				       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Login</button>
 						</li>
                     </ul>
                 </div>
