@@ -1,21 +1,27 @@
-<?php $page = "mcat"; ?>
+
 <?php require_once('db/conn.php') ?>
 <?php 
-if (isset($_POST['submit'])) 
+        $uid = $_GET['uid'];
+        $q1 = "select * from `main_category` where main_id=$uid";
+        $reslt = mysqli_query($conn, $q1);
+        $row= mysqli_fetch_array($reslt, MYSQLI_ASSOC);
+
+
+if (isset($_POST['update'])) 
 {
     $mcname = $_POST['mcname'];
     $mcdesc = $_POST['mdesc'];
-    $qry=("INSERT INTO `main_category` VALUES('','$mcname','$mcdesc')") or die(mysql_error());
+    $qry=("Update main_category SET main_cat_name='$mcname', main_desc='$mcdesc' where main_id='$uid'") ;
     mysqli_query($conn,$qry);
 
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?mid=inserted");
+    header("Location:http://localhost/learning/admin/viewmcat.php?id=updated");
 }
-
-
-
 ?>
+<?php $page = "upd_mcat"; ?>
 
-<!DOCTYPE html>
+
+
+ <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>
     <meta charset="utf-8">
@@ -62,9 +68,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+
 <body>
-    <!-- Wrapper required for sidebar transitions -->
-    <div class="st-container">
+ <div class="st-container">
         <!-- Fixed navbar -->
         
          <?php require_once('includes/nav-fixed.php');?>  
@@ -90,31 +96,36 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
         
         <!-- sidebar effects OUTSIDE of st-pusher: -->
-            <?php require_once('includes/sidebar.php');?>      
+            
+            <?php require_once('includes/sidebar.php');?>
+
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
+            
              <div class="panel panel-default">
                         <div class="panel-body">
                             <form method="post" action="">
                                 
-                                                           
+                               <label style="font-size: 18px; color: white; background-color: lightblue ;" class="btn ">Update Category Here ...</label>                            
+                              
                               <div class="form-group">
                                 <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" placeholder="Enter Category Name " required=>
+                                <input type="text" class="form-control" name="mcname" id="cname" 
+                                value="<?php echo $row['main_cat_name'] ;?>">
                               </div>
                               <div class="form-group">
                                 <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
+                                <textarea class="form-control" name="mdesc" id="desc"><?php echo $row['main_desc']; ?></textarea>
                               </div>
                               
-                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
+                              <input type="submit" name="update" value="update" class="btn btn-success btn-xl btn-block">
                                   
                               </input>
+                               
                             </form>
                              
                         </div>
@@ -125,75 +136,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         <!-- /st-pusher -->
         <!-- Footer -->
-         <?php// require_once('includes/footer.php');?>
+         <?php require_once('includes/footer.php');?>
         <!-- // Footer -->
     </div>
-    <!-- /st-container -->
-    <!-- Inline Script for colors and config objects; used by various external scripts; -->
-
-
-
-    <script>
-    var colors = {
-        "danger-color": "#e74c3c",
-        "success-color": "#81b53e",
-        "warning-color": "#f0ad4e",
-        "inverse-color": "#2c3e50",
-        "info-color": "#2d7cb5",
-        "default-color": "#6e7882",
-        "default-light-color": "#cfd9db",
-        "purple-color": "#9D8AC7",
-        "mustard-color": "#d4d171",
-        "lightred-color": "#e15258",
-        "body-bg": "#f6f6f6"
-    };
-    var config = {
-        theme: "html",
-        skins: {
-            "default": {
-                "primary-color": "#42a5f5"
-            }
-        }
-    };
-    </script>
-    <!-- Separate Vendor Script Bundles -->
-    <script src="js/vendor-core.min.js"></script>
-    <script src="js/vendor-countdown.min.js"></script>
-    <script src="js/vendor-tables.min.js"></script>
-    <script src="js/vendor-forms.min.js"></script>
-    <script src="js/vendor-carousel-slick.min.js"></script>
-    <script src="js/vendor-player.min.js"></script>
-    <script src="js/vendor-charts-flot.min.js"></script>
-    <script src="js/vendor-nestable.min.js"></script>
-    <!-- <script src="js/vendor-angular.min.js"></script> -->
-    <!-- Compressed Vendor Scripts Bundle
-    Includes all of the 3rd party JavaScript libraries above.
-    The bundle was generated using modern frontend development tools that are provided with the package
-    To learn more about the development process, please refer to the documentation.
-    Do not use it simultaneously with the separate bundles above. -->
-    <!-- <script src="js/vendor-bundle-all.min.js"></script> -->
-    <!-- Compressed App Scripts Bundle
-    Includes Custom Application JavaScript used for the current theme/module;
-    Do not use it simultaneously with the standalone modules below. -->
-    <!-- <script src="js/module-bundle-main.min.js"></script> -->
-    <!-- Standalone Modules
-    As a convenience, we provide the entire UI framework broke down in separate modules
-    Some of the standalone modules may have not been used with the current theme/module
-    but ALL the modules are 100% compatible -->
-    <script src="js/module-essentials.min.js"></script>
-    <script src="js/module-material.min.js"></script>
-    <script src="js/module-layout.min.js"></script>
-    <script src="js/module-sidebar.min.js"></script>
-    <script src="js/module-carousel-slick.min.js"></script>
-    <script src="js/module-player.min.js"></script>
-    <script src="js/module-messages.min.js"></script>
-    <script src="js/module-maps-google.min.js"></script>
-    <script src="js/module-charts-flot.min.js"></script>
-    <!-- [html] Core Theme Script:
-        Includes the custom JavaScript for this theme/module;
-        The file has to be loaded in addition to the UI modules above;
-        module-bundle-main.js already includes theme-core.js so this should be loaded
-        ONLY when using the standalone modules; -->
-    <script src="js/theme-core.min.js"></script>
-</body>
-</html>

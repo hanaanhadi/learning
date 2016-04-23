@@ -1,19 +1,5 @@
-<?php $page = "mcat"; ?>
-<?php require_once('db/conn.php') ?>
-<?php 
-if (isset($_POST['submit'])) 
-{
-    $mcname = $_POST['mcname'];
-    $mcdesc = $_POST['mdesc'];
-    $qry=("INSERT INTO `main_category` VALUES('','$mcname','$mcdesc')") or die(mysql_error());
-    mysqli_query($conn,$qry);
+<?php $page = "viewmcat"; ?>
 
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?mid=inserted");
-}
-
-
-
-?>
 
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
@@ -54,6 +40,7 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -100,24 +87,47 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <?php require_once('db/conn.php');?> 
              <div class="panel panel-default">
                         <div class="panel-body">
-                            <form method="post" action="">
-                                
-                                                           
-                              <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" placeholder="Enter Category Name " required=>
-                              </div>
-                              <div class="form-group">
-                                <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
-                              </div>
-                              
-                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
-                                  
-                              </input>
-                            </form>
+                            
                              
+                            <br><br><p class="btn btn-lg" style="background-color: lightblue; color: white;">All Inserted Main categories Are :</p><br><br>
+                             <table class="table table-bordered" border="1" >
+                              
+                                  <tr class="default" >
+                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">S.No</td>
+                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Category</td>
+                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Description</td>
+                                  <td  colspan="2"  style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Action</td>
+                                  </tr>
+                                 
+                                 <?php $conn = mysqli_connect("localhost", "root", "", "learning"); ?>
+                                 <?php 
+                                $query = "SELECT * FROM `main_category`";
+                                $result = mysqli_query($conn, $query);
+                                 
+
+
+
+                                  ?>
+                                 <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
+                                 
+                                 <tr>
+                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <?php echo $i; ?></td>
+                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <?php echo $row['main_cat_name'];?></td>
+                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <?php echo $row['main_desc'];?></td>
+                                
+                                   <td style="background-color: grey; color: white;  font-style: oblique; vertical-align: middle;"><a href="upd_mcat.php?uid= <?php echo $row['main_id'];?>" class="btn btn-primary">Update</a></td>
+
+                                  <td style="background-color: grey; color: white;  font-style: oblique; vertical-align: middle;"><a href="del_mcat.php?did= <?php echo $row['main_id'];?>" class="btn btn-danger">Delete</a></td>
+                                  </tr>
+                                
+                                <?php $i++; } ?>
+                             
+                            </table>
                         </div>
+                        
 
                     </div>
             <!-- /st-content -->
@@ -125,7 +135,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         <!-- /st-pusher -->
         <!-- Footer -->
-         <?php// require_once('includes/footer.php');?>
+         <?php require_once('includes/footer.php');?>
         <!-- // Footer -->
     </div>
     <!-- /st-container -->

@@ -1,19 +1,27 @@
-<?php $page = "mcat"; ?>
+<?php $page = "dcat"; ?>
 <?php require_once('db/conn.php') ?>
 <?php 
+
+$qry_main="select * from `main_category`"; 
+
+$qr1= mysqli_query($conn,$qry_main);
+
+
+
 if (isset($_POST['submit'])) 
 {
-    $mcname = $_POST['mcname'];
-    $mcdesc = $_POST['mdesc'];
-    $qry=("INSERT INTO `main_category` VALUES('','$mcname','$mcdesc')") or die(mysql_error());
-    mysqli_query($conn,$qry);
+    $mid= $_POST['main_id'];
+    $scname = $_POST['scname'];
+    $scdesc = $_POST['sdesc'];
 
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?mid=inserted");
+    $qry="Insert into `sub_category` values('','$mid','$scname','$scdesc')" or die(mysql_error());
+    mysqli_query($conn,$qry) or die (mysql_error());
+
+    header("Location:http://localhost/learning/admin/inst-dashboard.php?sid=inserted");
 }
 
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
@@ -97,19 +105,36 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
+
+            
              <div class="panel panel-default">
                         <div class="panel-body">
                             <form method="post" action="">
                                 
-                                                           
+                                 <div class="dropdown">
+                                  <label  class="btn btn-success" style="font-size: 16px;">Choose Main Category    </label> <br><br>
+                                  <select class="btn btn-primary btn-xlarge" name="main_id" id="main_id">
+                                      <option value="0">Choose Category</option>
+                                      <?php while ($row1=mysqli_fetch_array($qr1,MYSQLI_ASSOC) ) { ?>
+                                      <option value="<?php echo $row1['main_id']; ?>"><?php echo $row1['main_cat_name']; ?></option>
+                                     <?php } ?>
+                                    </select> 
+                                </div>  <br>       
+                                 <div class="dropdown">
+                                  <label  class="btn btn-success" style="font-size: 16px;">Choose Sub Category    </label> <br><br>
+                                  <select class="btn btn-primary btn-xlarge" name="sub_id" id="sub_id">
+                                      <option value="">Choose Sub Category</option>
+                                      </option>
+                        
+                                    </select> 
+                                </div>                    
                               <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" placeholder="Enter Category Name " required=>
+                                <label for="cname"><h2 class="btn btn-primary">Sub Category Name </h2></label>
+                                <input type="text" class="form-control" name="dcname" id="cname" placeholder="Enter Category Name " required>
                               </div>
                               <div class="form-group">
                                 <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
+                                <textarea class="form-control" name="sdesc" id="desc" placeholder="Enter Category Description " required></textarea>
                               </div>
                               
                               <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
@@ -158,6 +183,24 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#main_id").change(function(){
+            alert();
+            });
+        });
+
+    });       
+
+
+
+    </script>
+
+
     <script src="js/vendor-countdown.min.js"></script>
     <script src="js/vendor-tables.min.js"></script>
     <script src="js/vendor-forms.min.js"></script>

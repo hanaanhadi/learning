@@ -1,4 +1,26 @@
 <?php $page = "subcat"; ?>
+<?php require_once('db/conn.php') ?>
+<?php $qry_main="select * from `main_category`"; 
+
+                $qr1= mysqli_query($conn,$qry_main);
+
+?> 
+<?php 
+if (isset($_POST['submit'])) 
+{
+    $mid= $_POST['main_id'];
+    $scname = $_POST['scname'];
+    $scdesc = $_POST['sdesc'];
+
+    $qry="Insert into `sub_category` values('','$mid','$scname','$scdesc')" or die(mysql_error());
+    mysqli_query($conn,$qry) or die (mysql_error());
+
+    header("Location:http://localhost/learning/admin/inst-dashboard.php?sid=inserted");
+}
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -83,32 +105,43 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
+
+            
              <div class="panel panel-default">
                         <div class="panel-body">
-                            <form method="get" action="#">
+                            <form method="post" action="">
                                 
-                                                           
+                                 <div class="dropdown">
+                                  <label  class="btn btn-success" style="font-size: 16px;">Choose Main Category    </label> <br><br><select class="btn btn-primary btn-xlarge" name="main_id">
+                                      <option value="0">Choose Category</option>
+                                      <?php while ($row1=mysqli_fetch_array($qr1,MYSQLI_ASSOC) ) { ?>
+                                      <option value="<?php echo $row1['main_id']; ?>"><?php echo $row1['main_cat_name']; ?></option>
+                                     <?php } ?>
+                                    </select> 
+                                </div>                           
                               <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mname" id="cname" placeholder="Enter Category Name ">
+                                <label for="cname"><h2 class="btn btn-primary">Sub Category Name </h2></label>
+                                <input type="text" class="form-control" name="scname" id="cname" placeholder="Enter Category Name " required>
                               </div>
                               <div class="form-group">
                                 <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description "></textarea>
+                                <textarea class="form-control" name="sdesc" id="desc" placeholder="Enter Category Description " required></textarea>
                               </div>
                               
-                              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
+                                  
+                              </input>
                             </form>
-    
-                            
+                             
                         </div>
+
                     </div>
             <!-- /st-content -->
         </div>
+
         <!-- /st-pusher -->
         <!-- Footer -->
-         <?php require_once('includes/footer.php');?>
+         <?php// require_once('includes/footer.php');?>
         <!-- // Footer -->
     </div>
     <!-- /st-container -->
