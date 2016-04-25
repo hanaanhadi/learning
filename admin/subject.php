@@ -1,4 +1,36 @@
 <?php $page = "subject"; ?>
+<?php require_once('db/conn.php') ?>
+<?php 
+
+function load_maincat()
+{
+    $conn =  mysqli_connect("localhost","root","","learning");
+    $output = '';
+    $sql="select * from `main_category`";
+    $result = mysqli_query($conn,$sql);
+
+    while ($ro = mysqli_fetch_array($result))
+     {
+        $output .= '<option value="'. $ro["main_id"].'">'. $ro["main_cat_name"].'</option>';
+     }
+     return $output;
+}
+
+
+if (isset($_POST['submit'])) 
+{
+    $mid= $_POST['main_id'];
+    $sid= $_POST['sub_id'];
+    $dcname = $_POST['dcname'];
+    $dcdesc = $_POST['ddesc'];
+
+    $qry="Insert into `detail_category` values('','$mid','$sid','$dcname','$dcdesc')" or die(mysql_error());
+    mysqli_query($conn,$qry) or die (mysql_error());
+
+    header("Location:http://localhost/learning/admin/inst-dashboard.php?did=inserted");
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -40,6 +72,9 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+  
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -83,39 +118,113 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
+
+            
              <div class="panel panel-default">
                         <div class="panel-body">
-                            <form method="get" action="#">
+                            <form method="post" action="">
                                 
-                                                           
+                                 <div class="dropdown">
+                                  <label  class="btn btn-block" style="font-size: 16px; background-color: lightblue; color:white;">Choose Main Category  : </label>
+                                   <select class="btn btn-default btn-block" name="main_id" id="main_id">
+                                      <option value="">Select  Main Category</option>
+                                      <?php echo load_maincat(); ?>
+                                    </select>  
+                                   
+                                </div>  <br>   
+
+                                 <div class="dropdown">
+                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Sub Category   : </label> 
+                                  <select class="btn btn-default btn-block" name="sub_id" id="sub_id">
+                                      <option value="">Select Sub Category</option>
+                                        
+                                    </select> 
+                                </div> <br>
+                                <div class="dropdown">
+                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Subject   : </label> 
+                                  <select class="btn btn-default btn-block" name="detail_id" id="detail_id">
+                                      <option value="">Select Subject</option>
+                                        
+                                    </select> 
+                                </div>                    
+                                                 
+                              
                               <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mname" id="cname" placeholder="Enter Category Name ">
+                                <label for="cname"><h2 class="btn btn-primary">Detail Category Name </h2></label>
+                                <input type="text" class="form-control" name="scname" id="sname" placeholder="Enter Category Name " required>
                               </div>
                               <div class="form-group">
-                                <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description "></textarea>
+                                <label for="desc"><h2 class="btn btn-primary">Detail Description</h2></label>
+                                <textarea class="form-control" name="sdesc" id="sdesc" placeholder="Enter Category Description " required></textarea>
                               </div>
                               
-                              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
+                                  
+                              </input>
                             </form>
-    
-                            
+                             
                         </div>
+
                     </div>
             <!-- /st-content -->
         </div>
+
         <!-- /st-pusher -->
         <!-- Footer -->
-         <?php require_once('includes/footer.php');?>
+         <?phpr equire_once('includes/footer.php');?>
         <!-- // Footer -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
 
+    
+    
+    <script>
+        
+    $(document).ready(function()
+    {
 
+        $('#main_id').change(function()
+        {
+            var main_id = $(this).val();
 
+            $.ajax({
+
+                url:"fetch_subcat.php",
+                method:"POST",
+                data:{mainId:main_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#sub_id').html(data);
+                }
+
+            }); 
+
+        });
+
+        $('#sub_id').change(function()
+        {
+            var sub_id = $(this).val();
+
+            $.ajax({
+
+                url:"fetch_detcat.php",
+                method:"POST",
+                data:{subId:sub_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#detail_id').html(data);
+                }
+
+            }); 
+
+        });
+
+    });
+
+    </script>
     <script>
     var colors = {
         "danger-color": "#e74c3c",
@@ -138,9 +247,18 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
+    function myFunction() 
+    {
+        var main = document.getElementById("main_id").value;
+        alert(main);
+        
+        
+    }
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
+
+
     <script src="js/vendor-countdown.min.js"></script>
     <script src="js/vendor-tables.min.js"></script>
     <script src="js/vendor-forms.min.js"></script>

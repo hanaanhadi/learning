@@ -38,9 +38,12 @@
                         </ul>
                     </li>
                     
-                    <li class="hasSubmenuu">
-                        <a href="subject.php" <?php if($page == "subject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?>><i class="fa fa-bars"></i><span>Subjects</span></a>
-                       
+                    <li class="hasSubmenu">
+                        <a href="#subject"><i class="fa fa-user"></i><span>Subjects</span></a>
+                        <ul id="subject">
+                            <li> <a href="subject.php"  <?php if($page == "subject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Category</span></a></li>
+                            <li> <a href="viewdsubject.php"  <?php if($page == "viewsubject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Subjects</span></a></li>
+                        </ul>
                     </li>
                      
                     <li class="hasSubmenuu">
