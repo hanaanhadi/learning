@@ -81,6 +81,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
+        <div class="st-content">
+            <!-- extra div for emulating position:fixed of the menu -->
+            <div class="st-content-inner padding-none">
+            <div class="container-fluid">
+            <div class="page-section">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
@@ -89,14 +94,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <div class="panel-body">
                             
                              
-                            <br><br><p class="btn btn-lg" style="background-color: lightblue; color: white;">All Inserted Sub categories Are :</p><br><br>
+                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 165, 245); color: white;">All Inserted Sub categories Are :</p><br><br>
                              <table class="table table-bordered" border="1" >
                               
                                   <tr class="default" >
-                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">S.No</td>
-                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Category</td>
-                                  <td style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Description</td>
-                                  <td  colspan="2"  style="background-color: lightblue; color: white; font-size: 16px; font-style: oblique; text-align: center;">Action</td>
+                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">S.No</td>
+                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Category</td>
+                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Description</td>
+                                  <td  colspan="2"  style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Action</td>
                                   </tr>
                                  
                                  <?php $conn = mysqli_connect("localhost", "root", "", "learning"); ?>
@@ -111,16 +116,16 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                  <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
                                  
                                  <tr>
-                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <td style="background-color: white; color: black;  font-style: oblique;">
                                   <?php echo $i; ?></td>
-                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <td style="background-color: white; color: black;  font-style: oblique;">
                                   <?php echo $row['sub_cat_name'];?></td>
-                                  <td style="background-color: grey; color: white;  font-style: oblique;">
+                                  <td style="background-color: white; color: black;  font-style: oblique;">
                                   <?php echo $row['sub_desc'];?></td>
                                 
-                                   <td style="background-color: grey; color: white;  font-style: oblique; vertical-align: middle;"><a href="upd_subcat.php?uid= <?php echo $row['main_id'];?>" class="btn btn-primary">Update</a></td>
+                                   <td style="background-color: white; color: black;  font-style: oblique; vertical-align: middle;"><a href="upd_subcat.php?uid= <?php echo $row['main_id'];?>" class="btn btn-primary">Update</a></td>
 
-                                  <td style="background-color: grey; color: white;  font-style: oblique; vertical-align: middle;"><a href="del_subcat.php?did= <?php echo $row['main_id'];?>" class="btn btn-danger">Delete</a></td>
+                                  <td style="background-color: white; color: black;  font-style: oblique; vertical-align: middle;"><a href="del_subcat.php?did= <?php echo $row['main_id'];?>" class="btn btn-danger">Delete</a></td>
                                   </tr>
                                 
                                 <?php $i++; } ?>
@@ -129,6 +134,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </div>
                         
 
+                    </div>
+                    </div>
+                    </div>
                     </div>
             <!-- /st-content -->
         </div>

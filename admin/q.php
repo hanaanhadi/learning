@@ -1,4 +1,36 @@
-<?php $page = "viewmcat"; ?>
+<?php $page = "subject"; ?>
+<?php require_once('db/conn.php') ?>
+<?php 
+
+function load_maincat()
+{
+    $conn =  mysqli_connect("localhost","root","","learning");
+    $output = '';
+    $sql="select * from `main_category`";
+    $result = mysqli_query($conn,$sql);
+
+    while ($ro = mysqli_fetch_array($result))
+     {
+        $output .= '<option value="'. $ro["main_id"].'">'. $ro["main_cat_name"].'</option>';
+     }
+     return $output;
+}
+
+
+if (isset($_POST['submit'])) 
+{
+    $mid= $_POST['main_id'];
+    $sid= $_POST['sub_id'];
+    $dcname = $_POST['dcname'];
+    $dcdesc = $_POST['ddesc'];
+
+    $qry="Insert into `detail_category` values('','$mid','$sid','$dcname','$dcdesc')" or die(mysql_error());
+    mysqli_query($conn,$qry) or die (mysql_error());
+
+    header("Location:http://localhost/learning/admin/inst-dashboard.php?did=inserted");
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -40,7 +72,9 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
-    <link href="css/custom.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+  
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -81,64 +115,76 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
-             <div class="st-content">
-    <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
-        <div class="container-fluid">
-            <div class="page-section">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
-             <div class="panel panel-default">
+             <div class="st-content">
+            <!-- extra div for emulating position:fixed of the menu -->
+            <div class="st-content-inner padding-none">
+             <div class="container-fluid">
+             <div class="page-section">
+           
                         <div class="panel-body">
-                            
-                             
-                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 165, 245); color: white;">All Inserted Main categories Are :</p><br><br>
-                             <table class="table table-bordered" border="1" >
+                            <form method="post" action="">
+                                
+                                 <div class="dropdown">
+                                  <label  class="btn btn-block" style="font-size: 16px; background-color: lightblue; color:white;">Choose Main Category  : </label>
+                                   <select class="btn btn-default btn-block" name="main_id" id="main_id">
+                                      <option value="">Select  Main Category</option>
+                                      <?php echo load_maincat(); ?>
+                                    </select>  
+                                   
+                                </div>  <br>   
+
+                                 <div class="dropdown">
+                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Sub Category   : </label> 
+                                  <select class="btn btn-default btn-block" name="sub_id" id="sub_id">
+                                      <option value="">Select Sub Category</option>
+                                        
+                                    </select> 
+                                </div> <br>
+                                <div class="dropdown">
+                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Subject   : </label> 
+                                  <select class="btn btn-default btn-block" name="detail_id" id="detail_id">
+                                      <option value="">Select Subject</option>
+                                        
+                                    </select> 
+                                </div>    <br>               
+                                          
+                                <div class="form-group">
+                                    
+                                <form name="add_name" id="add_name">
+                                    <table class="table table-bordered" id="dynamic_field">
+                                        
+                                        <tr>
+                                            <td><input type="text" name="name[]" id="name" class="form-control name-list" placeholder="Enter Question"></input></td>
+                                            <td><button type="button" name="add" id="add" class="btn btn-success" >Add more</button></td>
+                                        </tr>
+
+                                    </table>
+                                    
+                               
+                                 
                               
-                                  <tr class="default" >
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">S.No</td>
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Category</td>
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Description</td>
-                                  <td  colspan="2"  style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Action</td>
-                                  </tr>
-                                 
-                                 <?php $conn = mysqli_connect("localhost", "root", "", "learning"); ?>
-                                 <?php 
-                                $query = "SELECT * FROM `main_category`";
-                                $result = mysqli_query($conn, $query);
-                                 
+                              
+                              
+                              <input type="submit" name="submit" value="submit" id="submit" class="btn btn-primary btn-xl btn-block">
+                                  
+                              </input>
+                               </form>
 
 
+                                </div>
+ 
+                            </form>
 
-                                  ?>
-                                 <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
-                                 
-                                 <tr>
-                                  <td style="background-color:white; color: black;  font-style: oblique;">
-                                  <?php echo $i; ?></td>
-                                  <td style="background-color: white; color: black;  font-style: oblique;">
-                                  <?php echo $row['main_cat_name'];?></td>
-                                  <td style="background-color:white; color: black;  font-style: oblique;">
-                                  <?php echo $row['main_desc'];?></td>
-                                
-                                   <td style="background-color:white; color: black;;  font-style: oblique; vertical-align: middle;"><a href="upd_mcat.php?uid= <?php echo $row['main_id'];?>" class="btn btn-primary">Update</a></td>
-
-                                  <td style="background-color: white; color: black;  font-style: oblique; vertical-align: middle;"><a href="del_mcat.php?did= <?php echo $row['main_id'];?>" class="btn btn-danger">Delete</a></td>
-                                  </tr>
-                                
-                                <?php $i++; } ?>
-                             
-                            </table>
+                            
                         </div>
-                        
 
-                    </div>
-                    </div>
-                    </div>
-                    </div>
+                    
             <!-- /st-content -->
+            </div>
+            </div>
         </div>
 
         <!-- /st-pusher -->
@@ -148,9 +194,90 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
+    <script >
+    $(document).ready(function(){
 
+        var i=1;
+        $('#add').click(function(){
 
+            i++;
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="name" class="form-control name-list" placeholder="Enter Question"></input></td><td><button name="remove" id="'+i+'" class="btn btn-danger btn-remove"> X </button></td></tr>');
+        });
 
+        $(document).on('click', '.btn_remove',function()
+        {
+            var button_id = $(this).attr("id");
+            $('#row'+button_id+'').remove();
+
+        });
+
+        $('#submit').click(function(){
+
+            $.ajax({
+
+                url:"inst_question.php",
+                method:"POST",
+                data:$('#add_name').serialize(),
+                success:function(data)
+                {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+
+        });
+
+    });
+
+    </script>
+    
+    
+    <script>
+        
+    $(document).ready(function()
+    {
+
+        $('#main_id').change(function()
+        {
+            var main_id = $(this).val();
+
+            $.ajax({
+
+                url:"fetch_subcat.php",
+                method:"POST",
+                data:{mainId:main_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#sub_id').html(data);
+                }
+
+            }); 
+
+        });
+
+        $('#sub_id').change(function()
+        {
+            var sub_id = $(this).val();
+
+            $.ajax({
+
+                url:"fetch_detcat.php",
+                method:"POST",
+                data:{subId:sub_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#detail_id').html(data);
+                }
+
+            }); 
+
+        });
+
+    });
+
+    </script>
     <script>
     var colors = {
         "danger-color": "#e74c3c",
@@ -173,9 +300,19 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
+                var counter = 1;
+                function addInput(divName){
+
+                          var newdiv = document.createElement('div');
+                          newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='' >";
+                          document.getElementById(divName).appendChild(newdiv);
+                          counter++;
+                }
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
+
+
     <script src="js/vendor-countdown.min.js"></script>
     <script src="js/vendor-tables.min.js"></script>
     <script src="js/vendor-forms.min.js"></script>

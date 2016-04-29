@@ -46,8 +46,12 @@
                         </ul>
                     </li>
                      
-                    <li class="hasSubmenuu">
-                        <a href="#subject-menu"><i class="fa fa-bars"></i><span>Questions</span></a>
+                    <li class="hasSubmenu">
+                        <a href="#question"><i class="fa fa-user"></i><span>Questions</span></a>
+                        <ul id="question">
+                            <li> <a href="question.php"  <?php if($page == "question"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Questions</span></a></li>
+                            <li> <a href="viewquestion.php"  <?php if($page == "viewquest"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Questions</span></a></li>
+                        </ul>
                     </li>
                     
                      <li class="hasSubmenuu">

@@ -23,7 +23,7 @@
 <script src="js/jquery-1.9.1.min.js"></script>
     
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 <!--WRAPPER START-->
 
 <div class="wrapper">
