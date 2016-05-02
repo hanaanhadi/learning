@@ -1,36 +1,4 @@
-<?php $page = "subject"; ?>
-<?php require_once('db/conn.php') ?>
-<?php 
 
-function load_maincat()
-{
-    $conn =  mysqli_connect("localhost","root","","learning");
-    $output = '';
-    $sql="select * from `main_category`";
-    $result = mysqli_query($conn,$sql);
-
-    while ($ro = mysqli_fetch_array($result))
-     {
-        $output .= '<option value="'. $ro["main_id"].'">'. $ro["main_cat_name"].'</option>';
-     }
-     return $output;
-}
-
-
-if (isset($_POST['submit'])) 
-{
-    $mid= $_POST['main_id'];
-    $sid= $_POST['sub_id'];
-    $dcname = $_POST['dcname'];
-    $dcdesc = $_POST['ddesc'];
-
-    $qry="Insert into `detail_category` values('','$mid','$sid','$dcname','$dcdesc')" or die(mysql_error());
-    mysqli_query($conn,$qry) or die (mysql_error());
-
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?did=inserted");
-}
-
-?>
 
 
 <!DOCTYPE html>
@@ -121,65 +89,59 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
              <div class="st-content">
             <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner padding-none">
-             <div class="container-fluid">
              <div class="page-section">
            
-                        <div class="panel-body">
-                            <form method="post" action="">
-                                
-                                 <div class="dropdown">
-                                  <label  class="btn btn-block" style="font-size: 16px; background-color: lightblue; color:white;">Choose Main Category  : </label>
-                                   <select class="btn btn-default btn-block" name="main_id" id="main_id">
-                                      <option value="">Select  Main Category</option>
-                                      <?php echo load_maincat(); ?>
-                                    </select>  
-                                   
-                                </div>  <br>   
-
-                                 <div class="dropdown">
-                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Sub Category   : </label> 
-                                  <select class="btn btn-default btn-block" name="sub_id" id="sub_id">
-                                      <option value="">Select Sub Category</option>
-                                        
-                                    </select> 
-                                </div> <br>
-                                <div class="dropdown">
-                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Subject   : </label> 
-                                  <select class="btn btn-default btn-block" name="detail_id" id="detail_id">
-                                      <option value="">Select Subject</option>
-                                        
-                                    </select> 
-                                </div>    <br>               
-                                          
-                                <div class="form-group">
+                       <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                   
+                    
+                    <div class="panel panel-default">
+                        <!-- Data table -->
+                        <table data-toggle="data-table" class="table table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="text-right" >Action</th>
                                     
-                                <form name="add_name" id="add_name">
-                                    <table class="table table-bordered" id="dynamic_field">
-                                        
-                                        <tr>
-                                            <td><input type="text" name="name[]" id="name" class="form-control name-list" placeholder="Enter Question"></input></td>
-                                            <td><button type="button" name="add" id="add" class="btn btn-success" >Add more</button></td>
-                                        </tr>
-
-                                    </table>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                               <tr>
+                                    <th>S.No</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
                                     
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
+                                <tr>
+                                    <td >
+                                  <?php echo $i; ?></td>
+                                  <td style="text-align: center;">
+                                  <?php echo $row['main_cat_name'];?></td>
+                                  <td >
+                                  <?php echo $row['main_desc'];?></td>
+                                     <td class="text-right" style="width: 70px;">
+                                            <a href="upd_mcat.php?uid= <?php echo $row['main_id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+
+                                            <a href="del_mcat.php?did= <?php echo $row['main_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                        class="fa fa-times"></i></a>
+                                        </td>
+                                    
+                                </tr>
                                
-                                 
-                              
-                              
-                              
-                              <input type="submit" name="submit" value="submit" id="submit" class="btn btn-primary btn-xl btn-block">
-                                  
-                              </input>
-                               </form>
-
-
-                                </div>
- 
-                            </form>
-
-                            
-                        </div>
+                                
+                    
+                                
+                                <?php $i++; } ?>
+                            </tbody>
+                        </table>
+                        <!-- // Data table -->
+                    </div>
+                </div>
 
                     
             <!-- /st-content -->

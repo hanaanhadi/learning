@@ -1,5 +1,11 @@
 <?php $page = "viewmcat"; ?>
+ <?php $conn = mysqli_connect("localhost", "root", "", "learning"); ?>
+    <?php
 
+    $query = "SELECT * FROM `main_category`";
+    $result = mysqli_query($conn, $query);
+                                 
+    ?>
 
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
@@ -94,43 +100,58 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <div class="panel-body">
                             
                              
-                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 165, 245); color: white;">All Inserted Main categories Are :</p><br><br>
-                             <table class="table table-bordered" border="1" >
-                              
-                                  <tr class="default" >
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">S.No</td>
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Category</td>
-                                  <td style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Description</td>
-                                  <td  colspan="2"  style="background-color: rgb(66, 165, 245); color: white; font-size: 16px; font-style: oblique; text-align: center;">Action</td>
-                                  </tr>
-                                 
-                                 <?php $conn = mysqli_connect("localhost", "root", "", "learning"); ?>
-                                 <?php 
-                                $query = "SELECT * FROM `main_category`";
-                                $result = mysqli_query($conn, $query);
-                                 
-
-
-
-                                  ?>
-                                 <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
-                                 
-                                 <tr>
-                                  <td style="background-color:white; color: black;  font-style: oblique;">
+                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Main categories Are :</p><br><br>
+                            
+                   
+                    
+                    <div class="panel panel-default">
+                        <!-- Data table -->
+                        <table data-toggle="data-table" class="table table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="text-right" >Action</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tfoot>
+                               <tr>
+                                    <th>S.No</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
+                                <tr>
+                                    <td >
                                   <?php echo $i; ?></td>
-                                  <td style="background-color: white; color: black;  font-style: oblique;">
+                                  <td style="text-align: center;">
                                   <?php echo $row['main_cat_name'];?></td>
-                                  <td style="background-color:white; color: black;  font-style: oblique;">
+                                  <td >
                                   <?php echo $row['main_desc'];?></td>
-                                
-                                   <td style="background-color:white; color: black;;  font-style: oblique; vertical-align: middle;"><a href="upd_mcat.php?uid= <?php echo $row['main_id'];?>" class="btn btn-primary">Update</a></td>
+                                     <td class="text-right" style="width: 70px;">
+                                            <a href="upd_mcat.php?uid= <?php echo $row['main_id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
 
-                                  <td style="background-color: white; color: black;  font-style: oblique; vertical-align: middle;"><a href="del_mcat.php?did= <?php echo $row['main_id'];?>" class="btn btn-danger">Delete</a></td>
-                                  </tr>
+                                            <a href="del_mcat.php?did= <?php echo $row['main_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                        class="fa fa-times"></i></a>
+                                        </td>
+                                    
+                                </tr>
+                               
+                                
+                    
                                 
                                 <?php $i++; } ?>
-                             
-                            </table>
+                            </tbody>
+                        </table>  
+                                 
+                                 
+                           
                         </div>
                         
 
@@ -148,7 +169,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
-
 
 
     <script>
@@ -211,6 +231,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         Includes the custom JavaScript for this theme/module;
         The file has to be loaded in addition to the UI modules above;
         module-bundle-main.js already includes theme-core.js so this should be loaded
+
         ONLY when using the standalone modules; -->
     <script src="js/theme-core.min.js"></script>
 </body>

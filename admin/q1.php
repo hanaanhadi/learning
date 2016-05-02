@@ -1,5 +1,6 @@
 
-<?php $page = "mcat"; ?>
+
+
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>
@@ -39,8 +40,9 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
-     <script src="js/jquery.min.js"></script>
-     
+    <script src="js/jquery.min.js"></script>
+  
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -81,44 +83,50 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
-             <div class="st-content">
-             <!-- extra div for emulating position:fixed of the menu -->
-              <div class="st-content-inner padding-none">
-             <div class="container-fluid">
-            <div class="page-section">
-              
-           
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
-             <div class="panel panel-default">
-                        <div class="panel-body">
-                            <span id = "message"></span>
-                            <form method="POST">
-                                 
+             <div class="st-content">
+            <!-- extra div for emulating position:fixed of the menu -->
+            <div class="st-content-inner padding-none">
+             <div class="page-section">
+           
+                       <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                   
+                    
+                    <div class="panel panel-default">
+                        <!-- Data table -->
+                        <div class="form-group">
+                                   
+                   
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label" style="text-align: left;">Category Name :</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-control-material">
+                                            <input type="text" class="form-control"placeholder="Insert Main Category">
+                                            
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                    <label class="col-sm-3 control-label" style="text-align: left;">Textarea</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-control-material">
+                                            <textarea id="textarea" class="form-control" rows="5"></textarea>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                        <!-- // Data table -->
+                    </div>
+                </div>
 
-                              <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" placeholder="Enter Category Name " required=>
-                              </div>
-                              <div class="form-group">
-                                <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
-                              </div>
-                              
-                              <input type="submit"  value="submit" id="submit"  class="btn btn-primary btn-xl btn-block">
-                                  
-                              </input>
-                            </form>
-                             
-                        </div>
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
+                    
             <!-- /st-content -->
+            </div>
+            </div>
         </div>
 
         <!-- /st-pusher -->
@@ -128,8 +136,90 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
+    <script >
+    $(document).ready(function(){
 
+        var i=1;
+        $('#add').click(function(){
+
+            i++;
+            $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="name" class="form-control name-list" placeholder="Enter Question"></input></td><td><button name="remove" id="'+i+'" class="btn btn-danger btn-remove"> X </button></td></tr>');
+        });
+
+        $(document).on('click', '.btn_remove',function()
+        {
+            var button_id = $(this).attr("id");
+            $('#row'+button_id+'').remove();
+
+        });
+
+        $('#submit').click(function(){
+
+            $.ajax({
+
+                url:"inst_question.php",
+                method:"POST",
+                data:$('#add_name').serialize(),
+                success:function(data)
+                {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+
+        });
+
+    });
+
+    </script>
+    
+    
+    <script>
         
+    $(document).ready(function()
+    {
+
+        $('#main_id').change(function()
+        {
+            var main_id = $(this).val();
+
+            $.ajax({
+
+                url:"fetch_subcat.php",
+                method:"POST",
+                data:{mainId:main_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#sub_id').html(data);
+                }
+
+            }); 
+
+        });
+
+        $('#sub_id').change(function()
+        {
+            var sub_id = $(this).val();
+
+            $.ajax({
+
+                url:"fetch_detcat.php",
+                method:"POST",
+                data:{subId:sub_id},
+                dataType:"text",
+                success:function(data)
+                {
+                    $('#detail_id').html(data);
+                }
+
+            }); 
+
+        });
+
+    });
+
+    </script>
     <script>
     var colors = {
         "danger-color": "#e74c3c",
@@ -152,36 +242,19 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
-    
-    $(document).ready(function()
-    {
+                var counter = 1;
+                function addInput(divName){
 
-        $('#submit').click(function()
-        {
-            var mcname = $('#cname').val();
-            var mdesc = $('#desc').val();
-            
-
-            $.ajax({
-
-                url:"inst_cat.php",
-                method:"POST",
-                data:,
-                dataType:"text",
-                success:function(data)
-                {
-                    $('#sub_id').html(data);
+                          var newdiv = document.createElement('div');
+                          newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='' >";
+                          document.getElementById(divName).appendChild(newdiv);
+                          counter++;
                 }
-
-            }); 
-
-        });
-
-    });
-    
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
+
+
     <script src="js/vendor-countdown.min.js"></script>
     <script src="js/vendor-tables.min.js"></script>
     <script src="js/vendor-forms.min.js"></script>

@@ -102,6 +102,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
+         <div class="st-content-inner padding-none">
+             <div class="container-fluid">
+            <div class="page-section">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
@@ -110,7 +113,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <div class="panel-body">
                             <form method="post" action="">
                                 
-                               <label style="font-size: 18px; color: white; background-color: lightblue ;" class="btn ">Update Category Here ...</label>                            
+                               <label style="font-size: 18px; color: white; background-color: rgb(66, 194, 251) ;" class="btn ">Update Category Here .</label>                            
                               
                               <div class="form-group">
                                 <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
@@ -132,6 +135,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
                     </div>
             <!-- /st-content -->
+            </div>
+            </div>
+            </div>
         </div>
 
         <!-- /st-pusher -->
