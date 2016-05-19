@@ -17,18 +17,7 @@ function load_maincat()
 }
 
 
-if (isset($_POST['submit'])) 
-{
-    $mid= $_POST['main_id'];
-    $sid= $_POST['sub_id'];
-    $dcname = $_POST['dcname'];
-    $dcdesc = $_POST['ddesc'];
 
-    $qry="Insert into `detail_category` values('','$mid','$sid','$dcname','$dcdesc')" or die(mysql_error());
-    mysqli_query($conn,$qry) or die (mysql_error());
-
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?did=inserted");
-}
 
 ?>
 
@@ -73,6 +62,25 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
     <script src="js/jquery.min.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function(){
+            $('#savebtn').click(function(event){
+                event.preventDefault();
+                $.ajax({
+
+                    url:"inst_dcat.php",
+                    method: "post",
+                    data:$('form').serialize(),
+                    dataType: "text",
+                    success:function(strmessage){
+                        $('#message').text(strmessage)
+                    }
+
+                })
+            });
+         });
+
+     </script>
   
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -128,11 +136,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             
              <div class="panel panel-default">
                         <div class="panel-body">
+                        <span id="message"></span>
                             <form method="post" action="">
-                                
+                                <table>
                                  <div class="dropdown">
-                                  <label  class="btn btn-block" style="font-size: 16px; background-color: lightblue; color:white;">Choose Main Category  : </label>
-                                   <select class="btn btn-default btn-block" name="main_id" id="main_id">
+                                  <label  style="font-size: 16px;  color:#667575;" class="btn">Choose Main Category  : </label>
+                                   <select class="btn btn-default " name="main_id" id="main_id">
                                       <option value="">Select  Main Category</option>
                                       <?php echo load_maincat(); ?>
                                     </select>  
@@ -140,23 +149,23 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 </div>  <br>   
 
                                  <div class="dropdown">
-                                  <label  class="btn btn-block " style="font-size: 16px;background-color: lightblue;color:white;">Choose Sub Category   : </label> 
-                                  <select class="btn btn-default btn-block" name="sub_id" id="sub_id">
+                                  <label  style="font-size: 16px;  color:#667575;"class="btn">Choose Sub Category  : </label> 
+                                  <select class="btn btn-default" name="sub_id" id="sub_id" style="padding-left: 25px;">
                                       <option value="">Select Sub Category</option>
                                         
                                     </select> 
                                 </div>                    
-                              
+                              </table>
                               <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Detail Category Name </h2></label>
+                                <label for="cname"><h2 class="btn btn-primary">Subject Name </h2></label>
                                 <input type="text" class="form-control" name="dcname" id="cname" placeholder="Enter Category Name " required>
                               </div>
                               <div class="form-group">
-                                <label for="desc"><h2 class="btn btn-primary">Detail Description</h2></label>
+                                <label for="desc"><h2 class="btn btn-primary">Subject Description</h2></label>
                                 <textarea class="form-control" name="ddesc" id="desc" placeholder="Enter Category Description " required></textarea>
                               </div>
                               
-                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
+                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block" id="savebtn">
                                   
                               </input>
                             </form>

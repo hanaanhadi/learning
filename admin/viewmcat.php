@@ -47,6 +47,8 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -99,6 +101,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
              <div class="panel panel-default">
                         <div class="panel-body">
                             
+                            <form method="post"> 
                              
                             <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Main categories Are :</p><br><br>
                             
@@ -135,7 +138,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                   <td >
                                   <?php echo $row['main_desc'];?></td>
                                      <td class="text-right" style="width: 70px;">
-                                            <a href="upd_mcat.php?uid= <?php echo $row['main_id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="upd_mcat.php?uid= <?php echo $row['main_id']; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
 
                                             <a href="del_mcat.php?did= <?php echo $row['main_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
                                         class="fa fa-times"></i></a>
@@ -151,7 +154,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </table>  
                                  
                                  
-                           
+                   </form>        
                         </div>
                         
 

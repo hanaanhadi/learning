@@ -2,21 +2,31 @@
 <?php require_once('db/conn.php') ?>
 <?php 
         $uid = $_GET['uid'];
-        $q1 = "select * from `main_category` where main_id=$uid";
-        $reslt = mysqli_query($conn, $q1);
+        $mid= $_GET['mid'];
+
+         $query = "SELECT sub_category.sub_id,main_category.main_id ,main_category.main_cat_name,main_category.main_id, sub_category.sub_cat_name, sub_category.sub_desc FROM sub_category
+       INNER JOIN main_category ON sub_category.main_id=main_category.main_id and sub_category.sub_id=$uid";
+
+        $reslt = mysqli_query($conn, $query);
         $row= mysqli_fetch_array($reslt, MYSQLI_ASSOC);
 
 
 if (isset($_POST['update'])) 
 {
-    $mcname = $_POST['mcname'];
-    $mdesc = $_POST['mdesc'];
-    $qry=("Update main_category SET main_cat_name='$mcname', main_desc='$mdesc' where main_id='$uid'") ;
+    $main_id= $_POST['main_id'];
+    $scname = $_POST['scname'];
+    $sdesc = $_POST['sdesc'];
+    $qry=("Update sub_category SET main_id='$main_id', sub_cat_name='$scname', sub_desc='$sdesc' where sub_id='$uid'") ;
     mysqli_query($conn,$qry);
 
-    header("Location:http://localhost/learning/admin/viewmcat.php?id=updated");
+    header("Location:http://localhost/learning/admin/viewsubcat.php?id=updated");
 }
 ?>
+<?php $qry_main="select * from `main_category`"; 
+
+                $qr1= mysqli_query($conn,$qry_main);
+
+?> 
 <?php $page = "upd_mcat"; ?>
 
 
@@ -115,16 +125,37 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <span id = "message"></span>
                             <form method="post" action="">
                                 
-                               <label style="font-size: 18px; color: white; background-color: rgb(66, 194, 251) ;" class="btn ">Update Category Here .</label>                            
+                               <label style="font-size: 18px; color: white; background-color: rgb(66, 194, 251) ;" class="btn ">Update Category Here .</label>     
+                               <div class="dropdown">
+                                <label  style="font-size: 16px;  color:#667575;" class="btn">Choose Main Category  : </label> 
+                                <select class=" btn btn-default " name="main_id">
+                                      <?php while ($row1=mysqli_fetch_array($qr1,MYSQLI_ASSOC) ) { ?>
+
+
+                                      <option value="<?php echo $row1['main_id']; ?>"
+
+                                        <?php if($row['main_id']==$row1['main_id']){ ?>
+                                       selected = "selected"
+
+                                        <?php } ?>
+
+                                       ><?php echo $row1['main_cat_name']; ?></option>
+                                   
+
+
+
+                                     <?php } ?>
+                                    </select> 
+                                </div>                       
                               
                               <div class="form-group">
                                 <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" 
-                                value="<?php echo $row['main_cat_name'] ;?>">
+                                <input type="text" class="form-control" name="scname" id="cname" 
+                                value="<?php echo $row['sub_cat_name'] ;?>">
                               </div>
                               <div class="form-group">
                                 <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc"><?php echo $row['main_desc']; ?></textarea>
+                                <textarea class="form-control" name="sdesc" id="desc"><?php echo $row['sub_desc']; ?></textarea>
                               </div>
                               
                               <button class="btn btn-success btn-lg center-block " id="update" name="update">

@@ -1,17 +1,8 @@
-<?php $page = "viewsubcat"; ?>
-
-
    <?php
     $conn = mysqli_connect("localhost", "root", "", "learning");
                                   
-    $qry = "SELECT * FROM `sub_category` ";
-    
-
-    $query = "SELECT sub_category.sub_id, main_category.main_id,main_category.main_cat_name,sub_category.sub_cat_name, sub_category.sub_desc FROM sub_category
-       INNER JOIN main_category ON sub_category.main_id=main_category.main_id";
-
+    $query = "SELECT * FROM `sub_category`";
     $result = mysqli_query($conn, $query);
-
   ?>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
@@ -119,9 +110,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
                                     <th class="text-right" >Action</th>
                                     
                                 </tr>
@@ -129,9 +119,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <tfoot>
                                <tr>
                                     <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                     
                                 </tr>
@@ -141,14 +130,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 <tr>
                                     <td >
                                   <?php echo $i; ?></td>
-                                  <td style="text-align: center;width: 115px;">
-                                  <?php echo $row['main_cat_name'];?></td>
-                                  <td style="text-align: center;width: 110px;">
+                                  <td style="text-align: center;">
                                   <?php echo $row['sub_cat_name'];?></td>
                                   <td >
                                   <?php echo $row['sub_desc'];?></td>
                                      <td class="text-right" style="width: 70px;">
-                                            <a href="upd_subcat.php?uid= <?php echo $row['sub_id']; ?>&mid=<?php echo $row['main_id'] ; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="upd_subcat.php?uid= <?php echo $row['sub_id']; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
 
                                             <a href="del_subcat.php?did= <?php echo $row['sub_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
                                         class="fa fa-times"></i></a>

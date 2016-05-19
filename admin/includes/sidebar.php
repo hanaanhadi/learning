@@ -27,24 +27,17 @@
                         <ul id="sub-cat">
                             <li> <a href="subcat.php"  <?php if($page == "subcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Category</span></a></li>
                             <li> <a href="viewsubcat.php"  <?php if($page == "viewsubcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Category</span></a></li>
-                             <li> <a href="upd_subcat.php"  <?php if($page == "upd_subcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Update Category</span></a></li>
+                             
                         </ul>
                     </li>
                           <li class="hasSubmenu">
-                        <a href="#det-cat"><i class="fa fa-user"></i><span>Detail Category</span></a>
+                        <a href="#det-cat"><i class="fa fa-user"></i><span>Subjects</span></a>
                         <ul id="det-cat">
-                            <li> <a href="dcat.php"  <?php if($page == "dcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Category</span></a></li>
-                            <li> <a href="viewdcat.php"  <?php if($page == "viewdcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Category</span></a></li>
+                            <li> <a href="dcat.php"  <?php if($page == "dcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Subjects</span></a></li>
+                            <li> <a href="viewdcat.php"  <?php if($page == "viewdcat"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Subjects</span></a></li>
                         </ul>
                     </li>
                     
-                    <li class="hasSubmenu">
-                        <a href="#subject"><i class="fa fa-user"></i><span>Subjects</span></a>
-                        <ul id="subject">
-                            <li> <a href="subject.php"  <?php if($page == "subject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>Insert Category</span></a></li>
-                            <li> <a href="viewdsubject.php"  <?php if($page == "viewsubject"){ ?> style="background-color: #000; color: #FFF;"  <?php } ?><span>View Subjects</span></a></li>
-                        </ul>
-                    </li>
                      
                     <li class="hasSubmenu">
                         <a href="#question"><i class="fa fa-user"></i><span>Questions</span></a>
@@ -54,10 +47,14 @@
                         </ul>
                     </li>
                     
-                     <li class="hasSubmenuu">
-                        <a href="#option-menu"><i class="fa fa-pencil-square-o"></i><span>Options</span></a>
-                        
+                     <li class="hasSubmenu">
+                        <a href="#setting-menu"><i class="fa fa-user"></i><span>Setting</span></a>
+                        <ul id="setting-menu">
+                            <li><a href="admin-control.php"><span>Admin Control</span></a></li>
+                            <li><a href="new-admin.php"><span>Make New Admin</span></a></li>
+                        </ul>
                     </li>
+                    
                     <li class="hasSubmenu">
                         <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
                         <ul id="account-menu">

@@ -1,14 +1,13 @@
-<?php $page = "viewsubcat"; ?>
+
 
 
    <?php
     $conn = mysqli_connect("localhost", "root", "", "learning");
                                   
-    $qry = "SELECT * FROM `sub_category` ";
     
 
-    $query = "SELECT sub_category.sub_id, main_category.main_id,main_category.main_cat_name,sub_category.sub_cat_name, sub_category.sub_desc FROM sub_category
-       INNER JOIN main_category ON sub_category.main_id=main_category.main_id";
+    $query = "SELECT detail_category.detail_id, sub_category.sub_cat_name,detail_category.detail_cat_name, detail_category.detail_desc FROM detail_category
+       INNER JOIN sub_category ON detail_category.sub_id=sub_category.sub_id";
 
     $result = mysqli_query($conn, $query);
 
@@ -109,7 +108,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             
                             <form method="post"> 
                              
-                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Sub categories Are :</p><br><br>
+                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Questions Are :</p><br><br>
                             
                    
                     
@@ -119,20 +118,20 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
+                                    <th>Category</th>
+                                    <th>Subject</th>
                                     <th style="text-align: center;">Description</th>
                                     <th class="text-right" >Action</th>
                                     
                                 </tr>
                             </thead>
                             <tfoot>
-                               <tr>
+                                <tr>
                                     <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
+                                    <th>Category</th>
+                                    <th>Subject</th>
                                     <th style="text-align: center;">Description</th>
-                                    <th>Action</th>
+                                    <th class="text-right" >Action</th>
                                     
                                 </tr>
                             </tfoot>
@@ -142,15 +141,15 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                     <td >
                                   <?php echo $i; ?></td>
                                   <td style="text-align: center;width: 115px;">
-                                  <?php echo $row['main_cat_name'];?></td>
-                                  <td style="text-align: center;width: 110px;">
                                   <?php echo $row['sub_cat_name'];?></td>
+                                  <td style="text-align: center;width: 110px;">
+                                  <?php echo $row['detail_cat_name'];?></td>
                                   <td >
-                                  <?php echo $row['sub_desc'];?></td>
+                                  <?php echo $row['detail_desc'];?></td>
                                      <td class="text-right" style="width: 70px;">
-                                            <a href="upd_subcat.php?uid= <?php echo $row['sub_id']; ?>&mid=<?php echo $row['main_id'] ; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="upd_detcat.php?uid= <?php echo $row['detail_id']; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
 
-                                            <a href="del_subcat.php?did= <?php echo $row['sub_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                            <a href="del_detcat.php?did= <?php echo $row['detail_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
                                         class="fa fa-times"></i></a>
                                         </td>
                                     

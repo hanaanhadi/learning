@@ -1,18 +1,8 @@
-<?php $page = "viewsubcat"; ?>
-
-
-   <?php
-    $conn = mysqli_connect("localhost", "root", "", "learning");
-                                  
-    $qry = "SELECT * FROM `sub_category` ";
-    
-
-    $query = "SELECT sub_category.sub_id, main_category.main_id,main_category.main_cat_name,sub_category.sub_cat_name, sub_category.sub_desc FROM sub_category
-       INNER JOIN main_category ON sub_category.main_id=main_category.main_id";
-
-    $result = mysqli_query($conn, $query);
-
-  ?>
+<?php
+  //  session_start();
+    //    include("../studentdashboard/php/connect.php");
+?>
+<?php $page = "instdashboard"; ?>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>
@@ -52,9 +42,6 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
-    <link href="css/custom.css" rel="stylesheet" />
-    <script src="js/jquery.min.js"></script>
-     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -95,86 +82,57 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
-             <div class="st-content">
-    <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
-        <div class="container-fluid">
-            <div class="page-section">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
-             <div class="panel panel-default">
-                        <div class="panel-body">
-                            
-                            <form method="post"> 
-                             
-                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Sub categories Are :</p><br><br>
-                            
-                   
-                    
-                    <div class="panel panel-default">
-                        <!-- Data table -->
-                        <table data-toggle="data-table" class="table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
-                                    <th class="text-right" >Action</th>
+            <div class="st-content">
+                <div class="st-content-inner padding-none">
+                    <div class="container-fluid">
+                        <div class="page-section">
+                            <div class="tabbable paper-shadow relative" data-z="0.5">
+                                <!-- Tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class=""><a href="admin-control.php"><i class="fa fa-file-text-o"></i> <span class="hidden-sm hidden-xs">Login Requests</span></a></li>
+                                    <li class="active"><a href="new-admin.php"><i class="fa fa-file-text-o"></i> <span class="hidden-sm hidden-xs">Make New Admin</span></a></li>
+                                </ul>
+                            </div><!--Code here-->
+                            <form role="form" action="../admin_login_process.php" id="signup_form" method="post">
+                            <div class="form-group">
+                                <div class="form-control-material">
+                                    <input id="firstName" type="text" class="form-control" name="u_name" id="u_name" placeholder="UserName">
+                                    <label for="firstName">User name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-control-material">
+                                    <input id="email" type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                    <label for="email">Email address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-control-material">
+                                    <input id="password" type="password" class="form-control" name="pass" id="pass" placeholder="Password">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-control-material">
+                                    <input id="passwordConfirmation" type="password" class="form-control" name="c_pass" id="c_pass" placeholder="Password Confirmation">
+                                    <label for="passwordConfirmation">Re-type password</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" value="Make Admin"></a>
+                            </div>
+                        </form>
                                     
-                                </tr>
-                            </thead>
-                            <tfoot>
-                               <tr>
-                                    <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                           <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
-                                <tr>
-                                    <td >
-                                  <?php echo $i; ?></td>
-                                  <td style="text-align: center;width: 115px;">
-                                  <?php echo $row['main_cat_name'];?></td>
-                                  <td style="text-align: center;width: 110px;">
-                                  <?php echo $row['sub_cat_name'];?></td>
-                                  <td >
-                                  <?php echo $row['sub_desc'];?></td>
-                                     <td class="text-right" style="width: 70px;">
-                                            <a href="upd_subcat.php?uid= <?php echo $row['sub_id']; ?>&mid=<?php echo $row['main_id'] ; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
-
-                                            <a href="del_subcat.php?did= <?php echo $row['sub_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
-                                        class="fa fa-times"></i></a>
-                                        </td>
-                                    
-                                </tr>
-                               
-                                
-                    
-                                
-                                <?php $i++; } ?>
-                            </tbody>
-                        </table>  
-                                 
-                                 
-                   </form>        
-                        </div>
-                        
-
+                       </div>
                     </div>
-                    </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+             
             <!-- /st-content -->
         </div>
-
         <!-- /st-pusher -->
         <!-- Footer -->
          <?php require_once('includes/footer.php');?>
@@ -182,6 +140,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
+    
 
 
     <script>
@@ -206,6 +165,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
+
+
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
@@ -244,7 +205,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         Includes the custom JavaScript for this theme/module;
         The file has to be loaded in addition to the UI modules above;
         module-bundle-main.js already includes theme-core.js so this should be loaded
-
         ONLY when using the standalone modules; -->
     <script src="js/theme-core.min.js"></script>
 </body>

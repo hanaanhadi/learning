@@ -1,4 +1,25 @@
 
+<?php require_once('db/conn.php') ?>
+<?php 
+
+function load_maincat()
+{
+    $conn =  mysqli_connect("localhost","root","","learning");
+    $output = '';
+    $sql="select * from `main_category`";
+    $result = mysqli_query($conn,$sql);
+
+    while ($ro = mysqli_fetch_array($result))
+     {
+        $output .= '<option value="'. $ro["main_id"].'">'. $ro["main_cat_name"].'</option>';
+     }
+     return $output;
+}
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -41,6 +62,25 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
     <script src="js/jquery.min.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function(){
+            $('#savebtn').click(function(event){
+                event.preventDefault();
+                $.ajax({
+
+                    url:"inst_qst.php",
+                    method: "post",
+                    data:$('form').serialize(),
+                    dataType: "text",
+                    success:function(strmessage){
+                        $('#message').text(strmessage)
+                    }
+
+                })
+            });
+         });
+
+     </script>
   
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -83,95 +123,96 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
+        <div class="st-content">
+        <!-- extra div for emulating position:fixed of the menu -->
+        <div class="st-content-inner padding-none">
+        <div class="container-fluid">
+            <div class="page-section">
+
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-             <div class="st-content">
-            <!-- extra div for emulating position:fixed of the menu -->
-            <div class="st-content-inner padding-none">
-             <div class="page-section">
-           
-                       <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
-                   
-                    
-                    <div class="panel panel-default">
-                        <!-- Data table -->
-                        <div class="form-group">
-                                   
-                   
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label  class="col-sm-3 control-label" style="text-align: left;">Category Name :</label>
-                                    <div class="col-sm-9">
-                                        <div class="form-control-material">
-                                            <input type="text" class="form-control"placeholder="Insert Main Category">
-                                            
-                                        </div>
-                                    </div>
-                                   <div class="form-group">
-                                    <label class="col-sm-3 control-label" style="text-align: left;">Textarea</label>
-                                    <div class="col-sm-9">
-                                        <div class="form-control-material">
-                                            <textarea id="textarea" class="form-control" rows="5"></textarea>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            
-                        <!-- // Data table -->
-                    </div>
-                </div>
 
-                    
+            
+             <div class="panel panel-default">
+                        <div class="panel-body">
+                        <span id="message"></span>
+                            <form method="post" action="">
+                                <table>
+                                 <div class="dropdown">
+                                  <tr><td><label  style="font-size: 16px;  color:#667575;" class="btn">Choose Main Category  : </label>
+                                   <select class="btn btn-default " name="main_id" id="main_id">
+                                      <option value="">Select  Main Category</option>
+                                      <?php echo load_maincat(); ?>
+                                    </select> </td></tr> 
+                                   
+                                </div>  <br>   
+
+                                 <div class="dropdown">
+                                 <tr><td> <label  style="font-size: 16px;  color:#667575;"class="btn">Choose Sub Category  : </label> 
+                                  <select  class="btn btn-default" name="sub_id" id="sub_id" style="padding-left: 25px;">
+                                      <option value="">Select Sub Category</option>
+                                        
+                                    </select> </td></tr>
+                                </div> 
+                                <div class="dropdown">
+                                 <tr><td> <label  style="font-size: 16px;  color:#667575;" class="btn">Choose  subject  : </label> 
+                                  <select class="btn btn-default" name="detail_id" id="detail_id">
+                                      <option value="">Select Subject</option>
+                                        
+                                    </select> </td></tr>
+                                </div>                    
+                              </table>
+                              
+                              <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Question</h2></label>
+                                <textarea class="form-control" name="qdesc" id="qdesc" placeholder="Enter Category Description " required></textarea>
+                              </div>
+                               <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Option 1 :</h2></label>
+                                <textarea class="form-control" name="opt1" id="qdesc" placeholder="Enter option" required></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Option 2 :</h2></label>
+                                <textarea class="form-control" name="opt2" id="qdesc" placeholder="Enter option" required></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Option 3 :</h2></label>
+                                <textarea class="form-control" name="opt3" id="qdesc" placeholder="Enter option" required></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Option 4 :</h2></label>
+                                <textarea class="form-control" name="opt4" id="qdesc" placeholder="Enter option" required></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Option 5 :</h2></label>
+                                <textarea class="form-control" name="opt5" id="qdesc" placeholder="Enter option" required></textarea>
+                              </div>
+                               <div class="form-group">
+                                <label for="desc"><h2 class="btn btn-primary">Correct Option :</h2></label>
+                                <textarea class="form-control" name="copt" id="qdesc" placeholder="Enter Correct option" required></textarea>
+                              </div>
+                              <input type="submit" name="submit" value="submit" class="btn btn-success btn-lg center-block" id="savebtn">
+                                  
+                              </input>
+                            </form>
+                             
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
             <!-- /st-content -->
-            </div>
-            </div>
         </div>
 
         <!-- /st-pusher -->
         <!-- Footer -->
-         <?php require_once('includes/footer.php');?>
+         <?phpr equire_once('includes/footer.php');?>
         <!-- // Footer -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
-    <script >
-    $(document).ready(function(){
 
-        var i=1;
-        $('#add').click(function(){
-
-            i++;
-            $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" id="name" class="form-control name-list" placeholder="Enter Question"></input></td><td><button name="remove" id="'+i+'" class="btn btn-danger btn-remove"> X </button></td></tr>');
-        });
-
-        $(document).on('click', '.btn_remove',function()
-        {
-            var button_id = $(this).attr("id");
-            $('#row'+button_id+'').remove();
-
-        });
-
-        $('#submit').click(function(){
-
-            $.ajax({
-
-                url:"inst_question.php",
-                method:"POST",
-                data:$('#add_name').serialize(),
-                success:function(data)
-                {
-                    alert(data);
-                    $('#add_name')[0].reset();
-                }
-            });
-
-        });
-
-    });
-
-    </script>
     
     
     <script>
@@ -198,7 +239,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         });
 
-        $('#sub_id').change(function()
+         $('#sub_id').change(function()
         {
             var sub_id = $(this).val();
 
@@ -242,14 +283,13 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
-                var counter = 1;
-                function addInput(divName){
-
-                          var newdiv = document.createElement('div');
-                          newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='' >";
-                          document.getElementById(divName).appendChild(newdiv);
-                          counter++;
-                }
+    function myFunction() 
+    {
+        var main = document.getElementById("main_id").value;
+        alert(main);
+        
+        
+    }
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>

@@ -40,7 +40,25 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
      <script src="js/jquery.min.js"></script>
-     
+     <script type="text/javascript">
+         $(document).ready(function(){
+            $('#savebtn').click(function(event){
+                event.preventDefault();
+                $.ajax({
+
+                    url:"inst_mcat.php",
+                    method: "post",
+                    data:$('form').serialize(),
+                    dataType: "text",
+                    success:function(strmessage){
+                        $('#message').text(strmessage)
+                    }
+
+                })
+            });
+         });
+
+     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -95,20 +113,21 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
              <div class="panel panel-default">
                         <div class="panel-body">
                             <span id = "message"></span>
-                            <form method="POST">
+                            <form method="post">
                                  
 
                               <div class="form-group">
-                                <label for="cname"><h2 class="btn btn-primary">Insert Main category</h2></label>
-                                <input type="text" class="form-control" name="mcname" id="cname" placeholder="Enter Category Name " required=>
+                                <label for="cname"><h2 class="btn" style="background-color: rgb(66, 165, 245); color: white;">Insert Main category</h2></label>
+                                <input type="text" class="form-control" name="mcname" id="mcname" placeholder="Enter Category Name " required=>
                               </div>
                               <div class="form-group">
-                                <label for="desc"><h2 class="btn btn-primary">Category Description</h2></label>
-                                <textarea class="form-control" name="mdesc" id="desc" placeholder="Enter Category Description " required></textarea>
+                                <label for="desc"><h2 class="btn"  style="background-color: rgb(66, 165, 245); color: white;">Category Description</h2></label>
+                                <textarea class="form-control" name="mdesc" id="mdesc" placeholder="Enter Category Description " required></textarea>
                               </div>
+                              <button class="btn btn-success btn-lg center-block " id="savebtn">
+                                  Submit
+                              </button>
                               
-                              <input type="submit"  value="submit" id="submit"  class="btn btn-primary btn-xl btn-block">
-                                  
                               </input>
                             </form>
                              
@@ -152,32 +171,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
-    
-    $(document).ready(function()
-    {
-
-        $('#submit').click(function()
-        {
-            var mcname = $('#cname').val();
-            var mdesc = $('#desc').val();
-            
-
-            $.ajax({
-
-                url:"inst_cat.php",
-                method:"POST",
-                data:,
-                dataType:"text",
-                success:function(data)
-                {
-                    $('#sub_id').html(data);
-                }
-
-            }); 
-
-        });
-
-    });
     
     </script>
     <!-- Separate Vendor Script Bundles -->

@@ -5,22 +5,6 @@
                 $qr1= mysqli_query($conn,$qry_main);
 
 ?> 
-<?php 
-if (isset($_POST['submit'])) 
-{
-    $mid= $_POST['main_id'];
-    $scname = $_POST['scname'];
-    $scdesc = $_POST['sdesc'];
-
-    $qry="Insert into `sub_category` values('','$mid','$scname','$scdesc')" or die(mysql_error());
-    mysqli_query($conn,$qry) or die (mysql_error());
-
-    header("Location:http://localhost/learning/admin/inst-dashboard.php?sid=inserted");
-}
-
-
-
-?>
 
 
 <!DOCTYPE html>
@@ -62,6 +46,26 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function(){
+            $('#savebtn').click(function(event){
+                event.preventDefault();
+                $.ajax({
+
+                    url:"inst_scat.php",
+                    method: "post",
+                    data:$('form').serialize(),
+                    dataType: "text",
+                    success:function(strmessage){
+                        $('#message').text(strmessage)
+                    }
+
+                })
+            });
+         });
+
+     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -114,10 +118,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             
              <div class="panel panel-default">
                         <div class="panel-body">
+                        <span id = "message"></span>
                             <form method="post" action="">
                                 
                                  <div class="dropdown">
-                                  <label  class="btn btn-success" style="font-size: 16px;">Choose Main Category    </label> <br><br><select class="btn btn-primary btn-xlarge" name="main_id">
+                                <label  style="font-size: 16px;  color:#667575;" class="btn">Choose Main Category  : </label> 
+                                <select class=" btn btn-default " name="main_id">
                                       <option value="0">Choose Category</option>
                                       <?php while ($row1=mysqli_fetch_array($qr1,MYSQLI_ASSOC) ) { ?>
                                       <option value="<?php echo $row1['main_id']; ?>"><?php echo $row1['main_cat_name']; ?></option>
@@ -133,9 +139,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 <textarea class="form-control" name="sdesc" id="desc" placeholder="Enter Category Description " required></textarea>
                               </div>
                               
-                              <input type="submit" name="submit" value="submit" class="btn btn-primary btn-xl btn-block">
-                                  
-                              </input>
+                               <button class="btn btn-success btn-lg center-block " id="savebtn">
+                                  Submit
+                              </button>
                             </form>
                              
                         </div>

@@ -1,18 +1,8 @@
-<?php $page = "viewsubcat"; ?>
-
-
-   <?php
-    $conn = mysqli_connect("localhost", "root", "", "learning");
-                                  
-    $qry = "SELECT * FROM `sub_category` ";
-    
-
-    $query = "SELECT sub_category.sub_id, main_category.main_id,main_category.main_cat_name,sub_category.sub_cat_name, sub_category.sub_desc FROM sub_category
-       INNER JOIN main_category ON sub_category.main_id=main_category.main_id";
-
-    $result = mysqli_query($conn, $query);
-
-  ?>
+<?php
+    //session_start();
+      //  include("../studentdashboard/php/connect.php");
+?>
+<?php $page = "instdashboard"; ?>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l3" lang="en">
 <head>
@@ -52,9 +42,6 @@ This variant is to be used when loading the separate styling modules -->
     <link href="css/module-colors-background.min.css" rel="stylesheet" />
     <link href="css/module-colors-buttons.min.css" rel="stylesheet" />
     <link href="css/module-colors-text.min.css" rel="stylesheet" />
-    <link href="css/custom.css" rel="stylesheet" />
-    <script src="js/jquery.min.js"></script>
-     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
@@ -62,6 +49,20 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("input[name='accept_all']").click(function() {
+        var checked = $(this).prop("checked"); 
+        $("#mytable tr td input[name='accept[]']").prop("checked",checked); 
+    });
+    $("input[name='ignore_all']").click(function() {
+        var checked = $(this).prop("checked"); 
+        $("#mytable tr td input[name='ignore[]']").prop("checked",checked); 
+    });
+});
+</script>
 </head>
 <body>
     <!-- Wrapper required for sidebar transitions -->
@@ -95,86 +96,104 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
         <div class="st-pusher" id="content">
-             <div class="st-content">
-    <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
-        <div class="container-fluid">
-            <div class="page-section">
             <!-- sidebar effects INSIDE of st-pusher: -->
             <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
             <!-- this is the wrapper for the content -->
-            <?php require_once('db/conn.php');?> 
-             <div class="panel panel-default">
-                        <div class="panel-body">
+            <div class="st-content">
+                <div class="st-content-inner padding-none">
+                    <div class="container-fluid">
+                        <div class="page-section">
+                            <div class="tabbable paper-shadow relative" data-z="0.5">
+                                <!-- Tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="admin-control.php"><i class="fa fa-file-text-o"></i> <span class="hidden-sm hidden-xs">Login Requests</span></a></li>
+                                    <li class=""><a href="new-admin.php"><i class="fa fa-file-text-o"></i> <span class="hidden-sm hidden-xs">Make New Admin</span></a></li>
+                                </ul>
+                            </div><!--Code here-->
                             
-                            <form method="post"> 
-                             
-                            <br><br><p class="btn btn-lg" style="background-color: rgb(66, 194, 251); color: white;">All Inserted Sub categories Are :</p><br><br>
-                            
-                   
-                    
-                    <div class="panel panel-default">
-                        <!-- Data table -->
-                        <table data-toggle="data-table" class="table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
-                                    <th class="text-right" >Action</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tfoot>
-                               <tr>
-                                    <th>S.No</th>
-                                    <th>Main Category</th>
-                                    <th>Sub Category</th>
-                                    <th style="text-align: center;">Description</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                           <?php $i=1; while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { ?>
-                                <tr>
-                                    <td >
-                                  <?php echo $i; ?></td>
-                                  <td style="text-align: center;width: 115px;">
-                                  <?php echo $row['main_cat_name'];?></td>
-                                  <td style="text-align: center;width: 110px;">
-                                  <?php echo $row['sub_cat_name'];?></td>
-                                  <td >
-                                  <?php echo $row['sub_desc'];?></td>
-                                     <td class="text-right" style="width: 70px;">
-                                            <a href="upd_subcat.php?uid= <?php echo $row['sub_id']; ?>&mid=<?php echo $row['main_id'] ; ?>"class="btn btn-default btn-xs" id= "updbtn"data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                    <?php
+                                        $query="SELECT * From `user` WHERE `status` LIKE '0' ";
+                                        $run=mysqli_query($connect,$query);
+                                        
+                                        if (mysqli_num_rows($run)>=1)
+                                        {
+                                            echo '
+                                                <form method="post" action="../Studentdashboard/php/user_status.php ">
+                                                    <table style="width:100%" class="table-striped table-bordered table-condensed table-hover" id="mytable">
+                                                            <tr style="background-color:green" class="success">
+                                                                <th>Serial #</th>
+                                                                <th>User Id</th>
+                                                                <th>User Name</th>
+                                                                <th>Email</th>
+                                                                <th>Password</th>
+                                                                <th>Action (A)</th>
+                                                                <th>Action (B)</th>
+                                                            </tr>
+                                            ';
+                                        $count = 1;
+                                        while($row=mysqli_fetch_array($run))
+                                            {
+                                                $user_id = $row['user_id'];
+                                                $username = $row['username'];
+                                                $email = $row['email'];
+                                                $pass = $row['password'];
 
-                                            <a href="del_subcat.php?did= <?php echo $row['sub_id']; ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete"><i
-                                        class="fa fa-times"></i></a>
-                                        </td>
-                                    
-                                </tr>
-                               
-                                
-                    
-                                
-                                <?php $i++; } ?>
-                            </tbody>
-                        </table>  
-                                 
-                                 
-                   </form>        
-                        </div>
-                        
-
+                                                $_SESSION['user_id']=$user_id;
+                                                $_SESSION['username']=$username;
+                                                $_SESSION['email']=$email;
+                                                $_SESSION['pass']=$pass;
+                                                
+                                                    echo"<tr style='background-color:lightblue' class='info'>";
+                                                        echo"<td>$count</td>";
+                                                        echo"<td>$user_id</td>";
+                                                        echo"<td>$username</td>";
+                                                        echo"<td>$email</td>";
+                                                        echo"<td>$pass</td>";
+                                                        
+                                                        echo "
+                                                                <td><input type='checkbox' name='accept[]' id='checks' value='$user_id'>  Accept</td><td><input type='checkbox' name='ignore[]' value='$user_id'>  Ignore</td></tr>
+                                                            </tr>";
+                                                    $count++;
+                                            }
+                                        }
+                                            else{
+                                                        
+                                                    echo "
+                                        <div class='panel panel-default' style='background-color:indigo'>
+                                            <div class='media v-middle success'>
+                                                <div class='media-left'>
+                                                    <div class='bg-green-400 text-white'>
+                                                        <div class='panel-body' style='background-color:#1C1C1C'>
+                                                            <i class='fa fa-credit-card fa-fw fa-2x' style='color:white'></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='media-body' >
+                                                    <span style='color:white;font-size:25px' class='text-body-2'><center>Sorry ! Table is Empty Now</center></span> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                            ";
+                                                        }        
+                                    ?>
+                                </table>
+                                <?php 
+                                    if (mysqli_num_rows($run))
+                                    {
+                                        echo '
+                                          <input type="checkbox" style="margin-left:78%" id="accept_all" name="accept_all">  Accept All<input type="checkbox" style="margin-left:4.5%" name="ignore_all">  Ignore All
+                                          <input type="submit" style="margin-left:78%" value="Accept" class="btn btn-success btn-md" href=""><input type="submit" style="margin-left:4.5%" value="Ignore" class="btn btn-success btn-md">
+                                        ';
+                                    }
+                                 ?>
+                                </form>
+                       </div>
                     </div>
-                    </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+             
             <!-- /st-content -->
         </div>
-
         <!-- /st-pusher -->
         <!-- Footer -->
          <?php require_once('includes/footer.php');?>
@@ -182,6 +201,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
+    
 
 
     <script>
@@ -206,6 +226,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             }
         }
     };
+
+
     </script>
     <!-- Separate Vendor Script Bundles -->
     <script src="js/vendor-core.min.js"></script>
@@ -244,7 +266,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         Includes the custom JavaScript for this theme/module;
         The file has to be loaded in addition to the UI modules above;
         module-bundle-main.js already includes theme-core.js so this should be loaded
-
         ONLY when using the standalone modules; -->
     <script src="js/theme-core.min.js"></script>
 </body>
